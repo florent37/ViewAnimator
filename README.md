@@ -10,7 +10,7 @@ ViewAnimator
            .alpha(0,1)
 
        .animate(text)
-           .translationY(-200, 0)
+           .translationX(-200, 0)
 
        .descelerate()
        .duration(2000)
@@ -58,6 +58,14 @@ ViewAnimator
        .animate(view)
             .textColor(Color.BLACK,Color.GREEN)
             .backgroundColor(Color.WHITE,Color.BLACK)
+       .start();
+```
+
+Rotation animations
+```java
+ViewAnimator
+       .animate(view)
+            .rotation(360)
        .start();
 ```
 

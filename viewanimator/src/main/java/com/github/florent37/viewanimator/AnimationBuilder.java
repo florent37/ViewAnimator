@@ -91,6 +91,28 @@ public class AnimationBuilder {
         return this;
     }
 
+    public AnimationBuilder pivotX(float pivotX){
+        view.setPivotX(pivotX);
+        return this;
+    }
+
+    public AnimationBuilder pivotY(float pivotY){
+        view.setPivotY(pivotY);
+        return this;
+    }
+
+    public AnimationBuilder rotationX(float... rotationX) {
+        return property("rotationX", rotationX);
+    }
+
+    public AnimationBuilder rotationY(float... rotationY) {
+        return property("rotationY", rotationY);
+    }
+
+    public AnimationBuilder rotation(float... rotation) {
+        return property("rotation", rotation);
+    }
+
     public AnimationBuilder backgroundColor(int... colors) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "backgroundColor", colors);
         objectAnimator.setEvaluator(new ArgbEvaluator());

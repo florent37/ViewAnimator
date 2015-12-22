@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                                             view.setText(String.format("%.02f",value));
                                         }
                                     }, 0, 1)
+
+                                .animate(image)
+                                    .rotation(360)
+
                                 .duration(5000)
                                 .start();
                     }
