@@ -25,6 +25,7 @@ public class ViewAnimator {
     AnimationListener.Start startListener;
     AnimationListener.Stop stopListener;
 
+    ViewAnimator prev = null;
     ViewAnimator next = null;
 
     public static AnimationBuilder animate(View view) {
@@ -32,16 +33,11 @@ public class ViewAnimator {
         return viewAnimator.addAnimationBuilder(view);
     }
 
-    public static ViewAnimator queue(ViewAnimator first, ViewAnimator... viewAnimators) {
-        if (first != null) {
-            if (viewAnimators.length > 0) {
-                first.next = viewAnimators[0];
-                for (int i = 0; i < viewAnimators.length - 1; ++i) {
-                    viewAnimators[i].next = viewAnimators[i + 1];
-                }
-            }
-            return first.start();
-        } else return null;
+    public AnimationBuilder thenAnimate(View view) {
+        ViewAnimator nextViewAnimator = new ViewAnimator();
+        this.next = nextViewAnimator;
+        nextViewAnimator.prev = this;
+        return nextViewAnimator.addAnimationBuilder(view);
     }
 
     public AnimationBuilder addAnimationBuilder(View view) {
@@ -80,8 +76,10 @@ public class ViewAnimator {
 
             @Override public void onAnimationEnd(Animator animation) {
                 if (stopListener != null) stopListener.onStop();
-                if (next != null)
+                if (next != null) {
+                    next.prev = null;
                     next.start();
+                }
             }
 
             @Override public void onAnimationCancel(Animator animation) {
@@ -97,18 +95,22 @@ public class ViewAnimator {
     }
 
     public ViewAnimator start() {
-        animatorSet = createAnimatorSet();
+        if (prev != null)
+            prev.start();
+        else {
+            animatorSet = createAnimatorSet();
 
-        if (waitForThisViewHeight != null)
-            waitForThisViewHeight.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override public boolean onPreDraw() {
-                    animatorSet.start();
-                    waitForThisViewHeight.getViewTreeObserver().removeOnPreDrawListener(this);
-                    return false;
-                }
-            });
-        else
-            animatorSet.start();
+            if (waitForThisViewHeight != null)
+                waitForThisViewHeight.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                    @Override public boolean onPreDraw() {
+                        animatorSet.start();
+                        waitForThisViewHeight.getViewTreeObserver().removeOnPreDrawListener(this);
+                        return false;
+                    }
+                });
+            else
+                animatorSet.start();
+        }
         return this;
     }
 

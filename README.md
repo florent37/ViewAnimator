@@ -3,6 +3,8 @@ ViewAnimator
 
 #Usage
 
+Animate multiple view from one method
+
 ```java
 ViewAnimator
        .animate(image)
@@ -25,10 +27,10 @@ ViewAnimator
 
 ```java
 ViewAnimator
-       .queue(
-               ViewAnimator.animate(image).alpha(0, 1).descelerate().duration(1000),
-               ViewAnimator.animate(text).scale(0, 1).accelerate().duration(300)
-       )
+       .animate(image)
+              .alpha(0, 1).descelerate().duration(1000),
+       .thenAnimate(text)
+               .scale(0, 1).accelerate().duration(300)
        .start();
 ```
 

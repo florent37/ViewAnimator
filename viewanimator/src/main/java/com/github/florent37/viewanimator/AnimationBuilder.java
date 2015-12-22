@@ -172,6 +172,9 @@ public class AnimationBuilder {
     public AnimationBuilder animate(View view) {
         return viewAnimator.addAnimationBuilder(view);
     }
+    public AnimationBuilder thenAnimate(View view) {
+        return viewAnimator.thenAnimate(view);
+    }
     //endregion
 
     //region Back to ViewAnimator
