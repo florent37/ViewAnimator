@@ -5,31 +5,31 @@ ViewAnimator
 
 ```java
 ViewAnimator
-                .animate(image)
-                    .translationY(1000, 0)
-                    .alpha(0,1)
+       .animate(image)
+           .translationY(1000, 0)
+           .alpha(0,1)
 
-                .animate(text)
-                    .translationY(-200, 0)
+       .animate(text)
+           .translationY(-200, 0)
 
-                .descelerate()
-                .duration(2000)
+       .descelerate()
+       .duration(2000)
 
-                .onStart(() -> {})
-                .onStop(() -> {})
+       .onStart(() -> {})
+       .onStop(() -> {})
 
-                .start();
+       .start();
 ```
 
 #Animation Queue
 
 ```java
 ViewAnimator
-                .queue(
-                        ViewAnimator.animate(image).alpha(0, 1).descelerate().duration(1000),
-                        ViewAnimator.animate(text).scale(0, 1).accelerate().duration(300)
-                )
-                .start();
+       .queue(
+               ViewAnimator.animate(image).alpha(0, 1).descelerate().duration(1000),
+               ViewAnimator.animate(text).scale(0, 1).accelerate().duration(300)
+       )
+       .start();
 ```
 
 #More
@@ -37,31 +37,31 @@ ViewAnimator
 Using DP values
 ```java
 ViewAnimator
-                .animate(image)
-                    .dp().translationY(-200, 0)
-                .start();
+       .animate(image)
+           .dp().translationY(-200, 0)
+       .start();
 ```
 
 Animate Height/Width values
 ```java
 ViewAnimator
-                .animate(view)
-                    .waitForHeight() //wait until a ViewTreeObserver notification
-                    .dp().width(100,200)
-                    .dp().height(50,100)
-                .start();
+       .animate(view)
+           .waitForHeight() //wait until a ViewTreeObserver notification
+           .dp().width(100,200)
+           .dp().height(50,100)
+       .start();
 ```
 
 Custom animations
 ```java
 ViewAnimator
-                .animate(text)
-                    .custom(new AnimationListener.Update() {
-                        @Override public void update(View view, float value) {
-                            text.setText(String.format("%.02f",value));
-                        }
-                    }, 0, 1)
-                .start();
+       .animate(text)
+           .custom(new AnimationListener.Update() {
+               @Override public void update(View view, float value) {
+                   text.setText(String.format("%.02f",value));
+               }
+           }, 0, 1)
+       .start();
 ```
 
 Community
