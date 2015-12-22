@@ -52,6 +52,15 @@ ViewAnimator
        .start();
 ```
 
+Color animations
+```java
+ViewAnimator
+       .animate(view)
+            .textColor(Color.BLACK,Color.GREEN)
+            .backgroundColor(Color.WHITE,Color.BLACK)
+       .start();
+```
+
 Custom animations
 ```java
 ViewAnimator

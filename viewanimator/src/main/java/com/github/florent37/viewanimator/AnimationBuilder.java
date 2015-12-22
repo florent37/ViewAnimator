@@ -1,13 +1,15 @@
 package com.github.florent37.viewanimator;
 
 import android.animation.Animator;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class AnimationBuilder {
         this.view = view;
     }
 
-    public AnimationBuilder dp(){
+    public AnimationBuilder dp() {
         nextValueWillBeDp = true;
         return this;
     }
@@ -47,15 +49,14 @@ public class AnimationBuilder {
         return dp * view.getContext().getResources().getDisplayMetrics().density;
     }
 
-    protected float[] getValues(float... values){
-        if(nextValueWillBeDp){
+    protected float[] getValues(float... values) {
+        if (nextValueWillBeDp) {
             float[] dpValues = new float[values.length];
-            for(int i=0;i<values.length;++i){
+            for (int i = 0; i < values.length; ++i) {
                 dpValues[i] = toDp(values[i]);
             }
             return dpValues;
-        }
-        else
+        } else
             return values;
     }
 
@@ -87,6 +88,22 @@ public class AnimationBuilder {
     public AnimationBuilder scale(float... scale) {
         scaleX(scale);
         scaleY(scale);
+        return this;
+    }
+
+    public AnimationBuilder backgroundColor(int... colors) {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "backgroundColor", colors);
+        objectAnimator.setEvaluator(new ArgbEvaluator());
+        this.animatorList.add(objectAnimator);
+        return this;
+    }
+
+    public AnimationBuilder textColor(int... colors) {
+        if (view instanceof TextView) {
+            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "textColor", colors);
+            objectAnimator.setEvaluator(new ArgbEvaluator());
+            this.animatorList.add(objectAnimator);
+        }
         return this;
     }
 
@@ -158,6 +175,7 @@ public class AnimationBuilder {
     public ViewAnimator onStop(AnimationListener.Stop stop) {
         return viewAnimator.onStop(stop);
     }
+
     public ViewAnimator onEnd(AnimationListener.Stop stop) {
         return onStop(stop);
     }

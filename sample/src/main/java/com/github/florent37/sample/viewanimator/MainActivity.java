@@ -1,5 +1,6 @@
 package com.github.florent37.sample.viewanimator;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
                 .animate(text)
                     .dp().translationY(-200, 0)
+                    .textColor(Color.BLACK,Color.BLUE)
 
                 .waitForHeight()
                 .descelerate()
