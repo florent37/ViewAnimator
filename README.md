@@ -56,9 +56,9 @@ Custom animations
 ```java
 ViewAnimator
        .animate(text)
-           .custom(new AnimationListener.Update() {
-               @Override public void update(View view, float value) {
-                   text.setText(String.format("%.02f",value));
+           .custom(new AnimationListener.Update<TextView>() {
+               @Override public void update(TextView view, float value) {
+                   view.setText(String.format("%.02f",value));
                }
            }, 0, 1)
        .start();

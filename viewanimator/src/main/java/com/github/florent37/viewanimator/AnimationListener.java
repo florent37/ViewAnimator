@@ -14,7 +14,7 @@ public class AnimationListener {
         void onStop();
     }
 
-    public static interface Update{
-        void update(View view, float value);
+    public static interface Update<V extends View>{
+        void update(V view, float value);
     }
 }
