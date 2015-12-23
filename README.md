@@ -69,7 +69,7 @@ ViewAnimator
        .scale(0,1)
 
        .start();
-
+```
 
 Add listeners
 ```java
