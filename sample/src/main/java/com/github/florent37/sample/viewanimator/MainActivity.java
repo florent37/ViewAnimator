@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
                     .dp().translationY(1000, 0)
                     .translationX(0)
 
-                .animate(text)
+                .andAnimate(text)
                     .dp().translationY(-200, 0)
-                    .textColor(Color.BLACK,Color.BLUE)
+                    .textColor(Color.BLACK, Color.BLUE)
 
                 .waitForHeight()
                 .descelerate()
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     }, 0, 1)
 
-                                .animate(image)
+                                .andAnimate(image)
                                     .rotation(360)
 
                                 .duration(5000)

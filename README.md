@@ -11,7 +11,7 @@ ViewAnimator
            .translationY(1000, 0)
            .alpha(0,1)
 
-       .animate(text)
+       .andAnimate(text)
            .translationX(-200, 0)
 
        .descelerate()

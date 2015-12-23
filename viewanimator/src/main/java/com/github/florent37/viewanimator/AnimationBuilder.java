@@ -169,7 +169,7 @@ public class AnimationBuilder {
     }
 
     //region Animate New View
-    public AnimationBuilder animate(View view) {
+    public AnimationBuilder andAnimate(View view) {
         return viewAnimator.addAnimationBuilder(view);
     }
     public AnimationBuilder thenAnimate(View view) {
