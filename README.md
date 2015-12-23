@@ -12,7 +12,7 @@ Animate multiple view from one method
 ```java
 ViewAnimator
        .animate(image)
-           .translationY(1000, 0)
+           .translationY(-1000, 0)
            .alpha(0,1)
        .andAnimate(text)
            .translationX(-200, 0)
@@ -25,14 +25,17 @@ ViewAnimator
        .duration(1000)
 
        .start();
+       
 ```
+
+[![gif](https://j.gifs.com/jR2Pp4.gif)](https://youtu.be/WB_vuyGe9GI)
 
 Without ViewAnimator
 
 ```java
 AnimatorSet animatorSet = new AnimatorSet();
 animatorSet.playTogether(
-  ObjectAnimator.ofFloat(image,"translationY",1000,0),
+  ObjectAnimator.ofFloat(image,"translationY",-1000,0),
   ObjectAnimator.ofFloat(image,"alpha",0,1);
   ObjectAnimator.ofFloat(text,"alpha",-200,0);
 );
@@ -57,6 +60,17 @@ animatorSet.start();
 
 #More
 
+[![gif](https://j.gifs.com/XD6R4V.gif)](https://youtu.be/Qlj40Y6ChSM)
+
+Add same animation on multiples view
+```java
+ViewAnimator
+       .animate(image,text)
+       .scale(0,1)
+
+       .start();
+
+
 Add listeners
 ```java
 ViewAnimator
@@ -70,7 +84,7 @@ ViewAnimator
 
 ```
 
-Using DP values
+Use DP values
 ```java
 ViewAnimator
        .animate(image)

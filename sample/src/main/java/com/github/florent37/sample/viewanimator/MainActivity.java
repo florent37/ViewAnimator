@@ -13,6 +13,7 @@ import com.github.florent37.viewanimator.ViewAnimator;
 public class MainActivity extends AppCompatActivity {
 
     ImageView image;
+    ImageView montain;
     TextView text;
     TextView percent;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         image = (ImageView) findViewById(R.id.image);
+        montain = (ImageView) findViewById(R.id.montain);
         text = (TextView) findViewById(R.id.text);
         percent = (TextView) findViewById(R.id.percent);
 
@@ -37,14 +39,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    protected void simpleAnimation(){
+        ViewAnimator
+                .animate(montain)
+                    .translationY(-1000, 0)
+                    .alpha(0,1)
+                .andAnimate(text)
+                    .translationX(-200, 0)
+                .descelerate()
+                .duration(2000)
+
+                .thenAnimate(image)
+                    .scale(1f,0.5f)
+                .accelerate()
+                .duration(1000)
+
+                .start();
+    }
+
     protected void animateParallel() {
         ViewAnimator
-                .animate(image)
-                    .dp().translationY(1000, 0)
-                    .dp().translationX(1000, 0)
+                .animate(montain,image)
+                    .dp().translationY(-1000, 0)
+                    .alpha(0,1)
+
+                .andAnimate(percent)
+                    .scale(0,1)
 
                 .andAnimate(text)
-                .dp().translationX(-200, 0)
+                    .dp().translationY(1000, 0)
                     .textColor(Color.BLACK, Color.WHITE)
                     .backgroundColor(Color.WHITE, Color.BLACK)
 

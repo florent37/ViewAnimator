@@ -4,56 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.github.florent37.viewanimator.MainActivity">
 
-    <TextView
-        android:id="@+id/percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:text="0.00%"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/image"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="I Love Github"/>
+        <ImageView
+            android:id="@+id/montain"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/montain"/>
 
-    <ImageView
-        android:layout_centerInParent="true"
-        android:id="@+id/image"
-        android:layout_width="100dp"
-        android:adjustViewBounds="true"
-        android:layout_height="wrap_content"
-        android:src="@drawable/github"/>
+        <TextView
+            android:id="@+id/percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="0.00%"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/github"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="I Love ViewAnimator"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:padding="5dp"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/parallel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Parallel"/>
+            android:text="Custom Animation"/>
+
         <Button
             android:id="@+id/sequentially"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sequentially"/>
+            android:text="Width / Height"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -21,15 +21,15 @@ import java.util.List;
 public class AnimationBuilder {
 
     private final ViewAnimator viewAnimator;
-    private final View view;
+    private final View[] views;
     private final List<Animator> animatorList = new ArrayList<>();
 
     protected boolean waitForHeight;
     protected boolean nextValueWillBeDp = false;
 
-    public AnimationBuilder(ViewAnimator viewAnimator, View view) {
+    public AnimationBuilder(ViewAnimator viewAnimator, View...views) {
         this.viewAnimator = viewAnimator;
-        this.view = view;
+        this.views = views;
     }
 
     public AnimationBuilder dp() {
@@ -43,11 +43,11 @@ public class AnimationBuilder {
     }
 
     protected float toDp(final float px) {
-        return px / view.getContext().getResources().getDisplayMetrics().density;
+        return px / views[0].getContext().getResources().getDisplayMetrics().density;
     }
 
     protected float toPx(final float dp) {
-        return dp * view.getContext().getResources().getDisplayMetrics().density;
+        return dp * views[0].getContext().getResources().getDisplayMetrics().density;
     }
 
     protected float[] getValues(float...values) {
@@ -62,7 +62,9 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder property(String propertyName, float... values) {
-        this.animatorList.add(ObjectAnimator.ofFloat(view, propertyName, getValues(values)));
+        for(View view : views) {
+            this.animatorList.add(ObjectAnimator.ofFloat(view, propertyName, getValues(values)));
+        }
         return this;
     }
 
@@ -93,12 +95,16 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder pivotX(float pivotX) {
-        ViewHelper.setPivotX(view, pivotX);
+        for(View view : views) {
+            ViewHelper.setPivotX(view, pivotX);
+        }
         return this;
     }
 
     public AnimationBuilder pivotY(float pivotY) {
-        ViewHelper.setPivotY(view, pivotY);
+        for(View view : views) {
+            ViewHelper.setPivotY(view, pivotY);
+        }
         return this;
     }
 
@@ -115,30 +121,36 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder backgroundColor(int... colors) {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "backgroundColor", colors);
-        objectAnimator.setEvaluator(new ArgbEvaluator());
-        this.animatorList.add(objectAnimator);
-        return this;
-    }
-
-    public AnimationBuilder textColor(int... colors) {
-        if (view instanceof TextView) {
-            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "textColor", colors);
+        for(View view : views) {
+            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "backgroundColor", colors);
             objectAnimator.setEvaluator(new ArgbEvaluator());
             this.animatorList.add(objectAnimator);
         }
         return this;
     }
 
+    public AnimationBuilder textColor(int... colors) {
+        for(View view : views) {
+            if (view instanceof TextView) {
+                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "textColor", colors);
+                objectAnimator.setEvaluator(new ArgbEvaluator());
+                this.animatorList.add(objectAnimator);
+            }
+        }
+        return this;
+    }
+
     public AnimationBuilder custom(final AnimationListener.Update update, float... values) {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(getValues((values)));
-        if (update != null)
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override public void onAnimationUpdate(ValueAnimator animation) {
-                    update.update(view, (Float) animation.getAnimatedValue());
-                }
-            });
-        add(valueAnimator);
+        for(final View view : views) {
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(getValues((values)));
+            if (update != null)
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override public void onAnimationUpdate(ValueAnimator animation) {
+                        update.update(view, (Float) animation.getAnimatedValue());
+                    }
+                });
+            add(valueAnimator);
+        }
         return this;
     }
 
@@ -170,12 +182,12 @@ public class AnimationBuilder {
     }
 
     //region Animate New View
-    public AnimationBuilder andAnimate(View view) {
-        return viewAnimator.addAnimationBuilder(view);
+    public AnimationBuilder andAnimate(View...views) {
+        return viewAnimator.addAnimationBuilder(views);
     }
 
-    public AnimationBuilder thenAnimate(View view) {
-        return viewAnimator.thenAnimate(view);
+    public AnimationBuilder thenAnimate(View...views) {
+        return viewAnimator.thenAnimate(views);
     }
     //endregion
 
@@ -227,8 +239,11 @@ public class AnimationBuilder {
 
     //endregion
 
+    public View[] getViews() {
+        return views;
+    }
     public View getView() {
-        return view;
+        return views[0];
     }
 
     public boolean isWaitForHeight() {

@@ -29,20 +29,20 @@ public class ViewAnimator {
     ViewAnimator prev = null;
     ViewAnimator next = null;
 
-    public static AnimationBuilder animate(View view) {
+    public static AnimationBuilder animate(View...view) {
         ViewAnimator viewAnimator = new ViewAnimator();
         return viewAnimator.addAnimationBuilder(view);
     }
 
-    public AnimationBuilder thenAnimate(View view) {
+    public AnimationBuilder thenAnimate(View...views) {
         ViewAnimator nextViewAnimator = new ViewAnimator();
         this.next = nextViewAnimator;
         nextViewAnimator.prev = this;
-        return nextViewAnimator.addAnimationBuilder(view);
+        return nextViewAnimator.addAnimationBuilder(views);
     }
 
-    public AnimationBuilder addAnimationBuilder(View view) {
-        AnimationBuilder animationBuilder = new AnimationBuilder(this, view);
+    public AnimationBuilder addAnimationBuilder(View...views) {
+        AnimationBuilder animationBuilder = new AnimationBuilder(this, views);
         animationList.add(animationBuilder);
         return animationBuilder;
     }
