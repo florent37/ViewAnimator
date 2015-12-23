@@ -1,15 +1,16 @@
 package com.github.florent37.viewanimator;
 
-import android.animation.Animator;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
+
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ArgbEvaluator;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +42,11 @@ public class AnimationBuilder {
         return this;
     }
 
-    public float toDp(final float px) {
+    protected float toDp(final float px) {
         return px / view.getContext().getResources().getDisplayMetrics().density;
     }
 
-    public float toPx(final float dp) {
+    protected float toPx(final float dp) {
         return dp * view.getContext().getResources().getDisplayMetrics().density;
     }
 
@@ -91,13 +92,13 @@ public class AnimationBuilder {
         return this;
     }
 
-    public AnimationBuilder pivotX(float pivotX){
-        view.setPivotX(pivotX);
+    public AnimationBuilder pivotX(float pivotX) {
+        ViewHelper.setPivotX(view,pivotX);
         return this;
     }
 
-    public AnimationBuilder pivotY(float pivotY){
-        view.setPivotY(pivotY);
+    public AnimationBuilder pivotY(float pivotY) {
+        ViewHelper.setPivotY(view, pivotY);
         return this;
     }
 
@@ -172,6 +173,7 @@ public class AnimationBuilder {
     public AnimationBuilder andAnimate(View view) {
         return viewAnimator.addAnimationBuilder(view);
     }
+
     public AnimationBuilder thenAnimate(View view) {
         return viewAnimator.thenAnimate(view);
     }

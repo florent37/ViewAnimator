@@ -1,10 +1,11 @@
 package com.github.florent37.viewanimator;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
+
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorSet;
 
 import java.util.ArrayList;
 import java.util.List;

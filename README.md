@@ -1,6 +1,10 @@
 ViewAnimator
 =======
 
+[![API](https://img.shields.io/badge/API-9%2B-green.svg)](https://github.com/florent37/ViewAnimator)
+
+A fluent Android animation library !
+
 #Usage
 
 Animate multiple view from one method
@@ -10,31 +14,61 @@ ViewAnimator
        .animate(image)
            .translationY(1000, 0)
            .alpha(0,1)
-
        .andAnimate(text)
            .translationX(-200, 0)
-
        .descelerate()
        .duration(2000)
+
+       .thenAnimate(image)
+            .scale(1f,0.5f)
+       .accelerate()
+       .duration(1000)
+
+       .start();
+```
+
+Without ViewAnimator
+
+```java
+AnimatorSet animatorSet = new AnimatorSet();
+animatorSet.playTogether(
+  ObjectAnimator.ofFloat(image,"translationY",1000,0),
+  ObjectAnimator.ofFloat(image,"alpha",0,1);
+  ObjectAnimator.ofFloat(text,"alpha",-200,0);
+);
+animatorSet.setInterpolator(new DescelerateInterpolator());
+animatorSet.setDuration(2000);
+animatorSet.addListener(new Animator.AnimatorListener(){
+    @Override public void onAnimationEnd(Animator animation) {
+
+      AnimatorSet animatorSet2 = new AnimatorSet();
+      animatorSet2.playTogether(
+          ObjectAnimator.ofFloat(image,"scaleX",1f,0.5f),
+          ObjectAnimator.ofFloat(image,"scaleY",1f,0.5f)
+      );
+      animatorSet2.setInterpolator(new AccelerateInterpolator());
+      animatorSet2.setDuration(1000);
+      animatorSet2.start();
+
+    }
+});
+animatorSet.start();
+```
+
+#More
+
+Add listeners
+```java
+ViewAnimator
+       .animate(image)
+       .scale(0,1)
 
        .onStart(() -> {})
        .onStop(() -> {})
 
        .start();
+
 ```
-
-#Animation Queue
-
-```java
-ViewAnimator
-       .animate(image)
-              .alpha(0, 1).descelerate().duration(1000),
-       .thenAnimate(text)
-               .scale(0, 1).accelerate().duration(300)
-       .start();
-```
-
-#More
 
 Using DP values
 ```java
@@ -44,7 +78,7 @@ ViewAnimator
        .start();
 ```
 
-Animate Height/Width values
+Animate Height / Width
 ```java
 ViewAnimator
        .animate(view)
@@ -83,13 +117,28 @@ ViewAnimator
        .start();
 ```
 
-Community
---------
+
+#Download
+
+Add into your **build.gradle**
+
+[![Download](https://api.bintray.com/packages/florent37/maven/ViewAnimator/images/download.svg)](https://bintray.com/florent37/maven/ViewAnimator/_latestVersion)
+
+```groovy
+compile 'com.github.florent37:viewanimator:1.0.0@aar'
+compile 'com.nineoldandroids:library:2.4.0'
+```
+
+#Community
 
 Looking for contributors, feel free to fork !
 
-Credits
--------
+#Dependencies
+
+[NineOldAndroid](nineoldandroids.com) : Android library for using the Honeycomb (Android 3.0) animation API on all versions of the platform back to 1.0!
+
+
+#Credits
 
 Author: Florent Champigny
 
@@ -106,8 +155,7 @@ Author: Florent Champigny
        src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/linkedin.png" />
 </a>
 
-License
---------
+#License
 
     Copyright 2015 florent37, Inc.
 
