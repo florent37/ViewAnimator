@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.montain).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                simpleAnimation();
+            }
+        });
+
         findViewById(R.id.sequentially).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 animateSequentially();
@@ -49,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 .descelerate()
                 .duration(2000)
 
-                .thenAnimate(image)
-                    .scale(1f,0.5f)
+                .thenAnimate(montain)
+                    .scale(1f,0.5f,1f)
                 .accelerate()
                 .duration(1000)
 

@@ -20,7 +20,7 @@ ViewAnimator
        .duration(2000)
 
        .thenAnimate(image)
-            .scale(1f,0.5f)
+            .scale(1f,0.5f,1f)
        .accelerate()
        .duration(1000)
 
@@ -28,7 +28,7 @@ ViewAnimator
        
 ```
 
-[![gif](https://j.gifs.com/jR2Pp4.gif)](https://youtu.be/WB_vuyGe9GI)
+[![gif](https://j.gifs.com/ERlBzW.gif)](https://youtu.be/ZHw8MfOM1Eg)
 
 Without ViewAnimator
 
@@ -46,8 +46,8 @@ animatorSet.addListener(new Animator.AnimatorListener(){
 
       AnimatorSet animatorSet2 = new AnimatorSet();
       animatorSet2.playTogether(
-          ObjectAnimator.ofFloat(image,"scaleX",1f,0.5f),
-          ObjectAnimator.ofFloat(image,"scaleY",1f,0.5f)
+          ObjectAnimator.ofFloat(image,"scaleX",1f,0.5f,1f),
+          ObjectAnimator.ofFloat(image,"scaleY",1f,0.5f,1f)
       );
       animatorSet2.setInterpolator(new AccelerateInterpolator());
       animatorSet2.setDuration(1000);

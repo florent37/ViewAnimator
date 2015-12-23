@@ -23,6 +23,7 @@
 
         <TextView
             android:id="@+id/percent"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -34,6 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:visibility="gone"
             android:adjustViewBounds="true"
             android:src="@drawable/github"/>
 
@@ -42,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:textSize="18sp"
             android:text="I Love ViewAnimator"
             android:textColor="@android:color/black"
             android:textStyle="bold"/>
@@ -49,6 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
