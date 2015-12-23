@@ -50,15 +50,15 @@ public class AnimationBuilder {
         return dp * view.getContext().getResources().getDisplayMetrics().density;
     }
 
-    protected float[] getValues(float... values) {
-        if (nextValueWillBeDp) {
-            float[] dpValues = new float[values.length];
-            for (int i = 0; i < values.length; ++i) {
-                dpValues[i] = toDp(values[i]);
-            }
-            return dpValues;
-        } else
+    protected float[] getValues(float...values) {
+        if (!nextValueWillBeDp)
             return values;
+
+        float[] pxValues = new float[values.length];
+        for (int i = 0; i < values.length; ++i) {
+            pxValues[i] = toPx(values[i]);
+        }
+        return pxValues;
     }
 
     public AnimationBuilder property(String propertyName, float... values) {
@@ -93,7 +93,7 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder pivotX(float pivotX) {
-        ViewHelper.setPivotX(view,pivotX);
+        ViewHelper.setPivotX(view, pivotX);
         return this;
     }
 

@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView image;
     TextView text;
+    TextView percent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         image = (ImageView) findViewById(R.id.image);
         text = (TextView) findViewById(R.id.text);
+        percent = (TextView) findViewById(R.id.percent);
 
         findViewById(R.id.parallel).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -39,42 +41,28 @@ public class MainActivity extends AppCompatActivity {
         ViewAnimator
                 .animate(image)
                     .dp().translationY(1000, 0)
-                    .translationX(0)
+                    .dp().translationX(1000, 0)
 
                 .andAnimate(text)
-                    .dp().translationY(-200, 0)
-                    .textColor(Color.BLACK, Color.BLUE)
+                .dp().translationX(-200, 0)
+                    .textColor(Color.BLACK, Color.WHITE)
+                    .backgroundColor(Color.WHITE, Color.BLACK)
 
                 .waitForHeight()
                 .descelerate()
                 .duration(2000)
 
-                .onStart(new AnimationListener.Start() {
-                    @Override public void onStart() {
-                        ViewAnimator
-                                .animate(text)
-                                    .custom(new AnimationListener.Update<TextView>() {
-                                        @Override public void update(TextView view, float value) {
-                                            view.setText(String.format("%.02f",value));
-                                        }
-                                    }, 0, 1)
+                .thenAnimate(percent)
+                    .custom(new AnimationListener.Update<TextView>() {
+                        @Override public void update(TextView view, float value) {
+                            view.setText(String.format("%.02f%%", value));
+                        }
+                    }, 0, 1)
 
-                                .andAnimate(image)
-                                    .rotation(360)
+                .andAnimate(image)
+                    .rotation(0, 360)
 
-                                .duration(5000)
-                                .start();
-                    }
-                })
-                .onStop(new AnimationListener.Stop() {
-                    @Override public void onStop() {
-                        ViewAnimator
-                                .animate(image)
-                                    .dp().width(10, 1000)
-                                .duration(3000)
-                                .start();
-                    }
-                })
+                .duration(5000)
 
                 .start();
     }
@@ -82,9 +70,15 @@ public class MainActivity extends AppCompatActivity {
     protected void animateSequentially() {
         ViewAnimator
                 .animate(image)
-                    .alpha(0, 1).descelerate().duration(1000)
-                .thenAnimate(text)
-                    .scale(0, 1).accelerate().duration(300)
+                    .dp().width(100f,150f)
+                    .alpha(1,0.1f)
+                    .descelerate()
+                    .duration(800)
+                .thenAnimate(image)
+                    .dp().width(150f,100f)
+                    .alpha(0.1f,1f)
+                    .accelerate()
+                    .duration(1200)
                 .start();
     }
 }

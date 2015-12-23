@@ -11,17 +11,33 @@
     tools:context="com.github.florent37.viewanimator.MainActivity">
 
     <TextView
+        android:id="@+id/percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="0.00%"/>
+
+    <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/image"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="I Love Github"/>
 
     <ImageView
         android:layout_centerInParent="true"
         android:id="@+id/image"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
+        android:adjustViewBounds="true"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/github"/>
 
     <LinearLayout
         android:layout_width="match_parent"
