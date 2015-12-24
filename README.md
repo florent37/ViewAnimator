@@ -17,7 +17,7 @@ ViewAnimator
            .translationY(-1000, 0)
            .alpha(0,1)
        .andAnimate(text)
-           .translationX(-200, 0)
+           .dp().translationX(-20, 0)
        .descelerate()
        .duration(2000)
 
@@ -38,12 +38,12 @@ Without ViewAnimator
 AnimatorSet animatorSet = new AnimatorSet();
 animatorSet.playTogether(
   ObjectAnimator.ofFloat(image,"translationY",-1000,0),
-  ObjectAnimator.ofFloat(image,"alpha",0,1);
-  ObjectAnimator.ofFloat(text,"alpha",-200,0);
+  ObjectAnimator.ofFloat(image,"alpha",0,1),
+  ObjectAnimator.ofFloat(text,"alpha",-200,0)
 );
 animatorSet.setInterpolator(new DescelerateInterpolator());
 animatorSet.setDuration(2000);
-animatorSet.addListener(new Animator.AnimatorListener(){
+animatorSet.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(Animator animation) {
 
       AnimatorSet animatorSet2 = new AnimatorSet();
