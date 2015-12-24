@@ -13,7 +13,7 @@ import com.github.florent37.viewanimator.ViewAnimator;
 public class MainActivity extends AppCompatActivity {
 
     ImageView image;
-    ImageView montain;
+    ImageView mountain;
     TextView text;
     TextView percent;
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         image = (ImageView) findViewById(R.id.image);
-        montain = (ImageView) findViewById(R.id.montain);
+        mountain = (ImageView) findViewById(R.id.mountain);
         text = (TextView) findViewById(R.id.text);
         percent = (TextView) findViewById(R.id.percent);
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.montain).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.mountain).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 simpleAnimation();
             }
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void simpleAnimation(){
         ViewAnimator
-                .animate(montain)
+                .animate(mountain)
                     .translationY(-1000, 0)
                     .alpha(0,1)
                 .andAnimate(text)
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 .descelerate()
                 .duration(2000)
 
-                .thenAnimate(montain)
+                .thenAnimate(mountain)
                     .scale(1f,0.5f,1f)
                 .accelerate()
                 .duration(1000)
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void animateParallel() {
         ViewAnimator
-                .animate(montain,image)
+                .animate(mountain,image)
                     .dp().translationY(-1000, 0)
                     .alpha(0,1)
 
