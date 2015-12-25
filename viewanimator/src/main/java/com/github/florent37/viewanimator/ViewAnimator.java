@@ -1,16 +1,17 @@
 package com.github.florent37.viewanimator;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
-
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * AnimationBuilder
+ *
  * Created by florentchampigny on 22/12/2015.
  */
 public class ViewAnimator {
@@ -29,19 +30,19 @@ public class ViewAnimator {
     ViewAnimator prev = null;
     ViewAnimator next = null;
 
-    public static AnimationBuilder animate(View...view) {
+    public static AnimationBuilder animate(View... view) {
         ViewAnimator viewAnimator = new ViewAnimator();
         return viewAnimator.addAnimationBuilder(view);
     }
 
-    public AnimationBuilder thenAnimate(View...views) {
+    public AnimationBuilder thenAnimate(View... views) {
         ViewAnimator nextViewAnimator = new ViewAnimator();
         this.next = nextViewAnimator;
         nextViewAnimator.prev = this;
         return nextViewAnimator.addAnimationBuilder(views);
     }
 
-    public AnimationBuilder addAnimationBuilder(View...views) {
+    public AnimationBuilder addAnimationBuilder(View... views) {
         AnimationBuilder animationBuilder = new AnimationBuilder(this, views);
         animationList.add(animationBuilder);
         return animationBuilder;
@@ -71,11 +72,13 @@ public class ViewAnimator {
             animatorSet.setInterpolator(interpolator);
 
         animatorSet.addListener(new Animator.AnimatorListener() {
-            @Override public void onAnimationStart(Animator animation) {
+            @Override
+            public void onAnimationStart(Animator animation) {
                 if (startListener != null) startListener.onStart();
             }
 
-            @Override public void onAnimationEnd(Animator animation) {
+            @Override
+            public void onAnimationEnd(Animator animation) {
                 if (stopListener != null) stopListener.onStop();
                 if (next != null) {
                     next.prev = null;
@@ -83,11 +86,13 @@ public class ViewAnimator {
                 }
             }
 
-            @Override public void onAnimationCancel(Animator animation) {
+            @Override
+            public void onAnimationCancel(Animator animation) {
 
             }
 
-            @Override public void onAnimationRepeat(Animator animation) {
+            @Override
+            public void onAnimationRepeat(Animator animation) {
 
             }
         });
@@ -102,13 +107,16 @@ public class ViewAnimator {
             animatorSet = createAnimatorSet();
 
             if (waitForThisViewHeight != null)
-                waitForThisViewHeight.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                    @Override public boolean onPreDraw() {
-                        animatorSet.start();
-                        waitForThisViewHeight.getViewTreeObserver().removeOnPreDrawListener(this);
-                        return false;
-                    }
-                });
+                waitForThisViewHeight.getViewTreeObserver().addOnPreDrawListener(
+                        new ViewTreeObserver.OnPreDrawListener() {
+                            @Override
+                            public boolean onPreDraw() {
+                                animatorSet.start();
+                                waitForThisViewHeight.getViewTreeObserver()
+                                        .removeOnPreDrawListener(this);
+                                return false;
+                            }
+                        });
             else
                 animatorSet.start();
         }

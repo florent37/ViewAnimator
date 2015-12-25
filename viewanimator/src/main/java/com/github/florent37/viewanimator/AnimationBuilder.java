@@ -1,21 +1,21 @@
 package com.github.florent37.viewanimator;
 
+import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.ArgbEvaluator;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * AnimationBuilder
+ *
  * Created by florentchampigny on 22/12/2015.
  */
 public class AnimationBuilder {
@@ -27,7 +27,7 @@ public class AnimationBuilder {
     protected boolean waitForHeight;
     protected boolean nextValueWillBeDp = false;
 
-    public AnimationBuilder(ViewAnimator viewAnimator, View...views) {
+    public AnimationBuilder(ViewAnimator viewAnimator, View... views) {
         this.viewAnimator = viewAnimator;
         this.views = views;
     }
@@ -50,7 +50,7 @@ public class AnimationBuilder {
         return dp * views[0].getContext().getResources().getDisplayMetrics().density;
     }
 
-    protected float[] getValues(float...values) {
+    protected float[] getValues(float... values) {
         if (!nextValueWillBeDp)
             return values;
 
@@ -62,7 +62,7 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder property(String propertyName, float... values) {
-        for(View view : views) {
+        for (View view : views) {
             this.animatorList.add(ObjectAnimator.ofFloat(view, propertyName, getValues(values)));
         }
         return this;
@@ -95,15 +95,15 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder pivotX(float pivotX) {
-        for(View view : views) {
-            ViewHelper.setPivotX(view, pivotX);
+        for (View view : views) {
+            view.setPivotX(pivotX);
         }
         return this;
     }
 
     public AnimationBuilder pivotY(float pivotY) {
-        for(View view : views) {
-            ViewHelper.setPivotY(view, pivotY);
+        for (View view : views) {
+            view.setPivotY(pivotY);
         }
         return this;
     }
@@ -121,7 +121,7 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder backgroundColor(int... colors) {
-        for(View view : views) {
+        for (View view : views) {
             ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "backgroundColor", colors);
             objectAnimator.setEvaluator(new ArgbEvaluator());
             this.animatorList.add(objectAnimator);
@@ -130,7 +130,7 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder textColor(int... colors) {
-        for(View view : views) {
+        for (View view : views) {
             if (view instanceof TextView) {
                 ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "textColor", colors);
                 objectAnimator.setEvaluator(new ArgbEvaluator());
@@ -141,11 +141,12 @@ public class AnimationBuilder {
     }
 
     public AnimationBuilder custom(final AnimationListener.Update update, float... values) {
-        for(final View view : views) {
+        for (final View view : views) {
             ValueAnimator valueAnimator = ValueAnimator.ofFloat(getValues((values)));
             if (update != null)
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override public void onAnimationUpdate(ValueAnimator animation) {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
                         update.update(view, (Float) animation.getAnimatedValue());
                     }
                 });
@@ -156,7 +157,8 @@ public class AnimationBuilder {
 
     public AnimationBuilder height(float... height) {
         return custom(new AnimationListener.Update() {
-            @Override public void update(View view, float value) {
+            @Override
+            public void update(View view, float value) {
                 view.getLayoutParams().height = (int) value;
                 view.requestLayout();
             }
@@ -165,7 +167,8 @@ public class AnimationBuilder {
 
     public AnimationBuilder width(float... width) {
         return custom(new AnimationListener.Update() {
-            @Override public void update(View view, float value) {
+            @Override
+            public void update(View view, float value) {
                 view.getLayoutParams().width = (int) value;
                 view.requestLayout();
             }
@@ -182,11 +185,11 @@ public class AnimationBuilder {
     }
 
     //region Animate New View
-    public AnimationBuilder andAnimate(View...views) {
+    public AnimationBuilder andAnimate(View... views) {
         return viewAnimator.addAnimationBuilder(views);
     }
 
-    public AnimationBuilder thenAnimate(View...views) {
+    public AnimationBuilder thenAnimate(View... views) {
         return viewAnimator.thenAnimate(views);
     }
     //endregion
@@ -242,6 +245,7 @@ public class AnimationBuilder {
     public View[] getViews() {
         return views;
     }
+
     public View getView() {
         return views[0];
     }
