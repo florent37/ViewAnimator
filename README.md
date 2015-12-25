@@ -138,7 +138,7 @@ ViewAnimator
 
 Add into your **build.gradle**
 
-[![Download](https://api.bintray.com/packages/florent37/maven/ViewAnimator/images/download.svg)](https://bintray.com/markmjw/maven/ViewAnimator/_latestVersion)
+[![Download](https://api.bintray.com/packages/markmjw/maven/ViewAnimator/images/download.svg)](https://bintray.com/markmjw/maven/ViewAnimator/_latestVersion)
 
 ```groovy
 compile 'cn.markmjw:animator:1.0.0'
