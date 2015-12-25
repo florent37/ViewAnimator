@@ -1,12 +1,11 @@
 ViewAnimator
 =======
 
-[![API](https://img.shields.io/badge/API-9%2B-green.svg)](https://github.com/florent37/ViewAnimator)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ViewAnimator-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2942)
+[![API](https://img.shields.io/badge/API-14%2B-green.svg)](https://github.com/MarkMjw/ViewAnimator)
 
 A fluent Android animation library !
 
-[![png](https://raw.githubusercontent.com/florent37/ViewAnimator/master/montain_small.jpg)](https://github.com/florent37/ViewAnimator)
+[![png](https://raw.githubusercontent.com/MarkMjw/ViewAnimator/master/montain_small.jpg)](https://github.com/MarkMjw/ViewAnimator)
 
 #Usage
 
@@ -150,37 +149,15 @@ compile 'com.nineoldandroids:library:2.4.0'
 
 Looking for contributors, feel free to fork !
 
-#Dependencies
-
-[NineOldAndroid](nineoldandroids.com) : Android library for using the Honeycomb (Android 3.0) animation API on all versions of the platform back to 1.0!
-
-
-#Credits
-
-Author: Florent Champigny
-
-<a href="https://plus.google.com/+florentchampigny">
-  <img alt="Follow me on Google+"
-       src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/gplus.png" />
-</a>
-<a href="https://twitter.com/florent_champ">
-  <img alt="Follow me on Twitter"
-       src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/twitter.png" />
-</a>
-<a href="https://www.linkedin.com/profile/view?id=297860624">
-  <img alt="Follow me on LinkedIn"
-       src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/linkedin.png" />
-</a>
-
 #License
 
-    Copyright 2015 florent37, Inc.
+    Copyright (C) 2015 MarkMjw
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+         http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
