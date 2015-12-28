@@ -40,7 +40,7 @@ AnimatorSet animatorSet = new AnimatorSet();
 animatorSet.playTogether(
   ObjectAnimator.ofFloat(image,"translationY",-1000,0),
   ObjectAnimator.ofFloat(image,"alpha",0,1),
-  ObjectAnimator.ofFloat(text,"alpha",-200,0)
+  ObjectAnimator.ofFloat(text,"translationX",-200,0)
 );
 animatorSet.setInterpolator(new DescelerateInterpolator());
 animatorSet.setDuration(2000);
