@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
          versionName PROJ_VERSION
@@ -15,7 +15,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.nineoldandroids:library:2.4.0'
 }
 
 if(hasProperty("bintrayUser") || hasProperty("BINTRAY_USER"))
