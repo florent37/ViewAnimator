@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.florent37.viewanimator.AnimationListener;
+import com.github.florent37.viewanimator.EnhancedViewAnimator;
 import com.github.florent37.viewanimator.ViewAnimator;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +42,20 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sequentially).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 animateSequentially();
+            }
+        });
+
+        final View btnWave = findViewById(R.id.wave);
+        btnWave.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                EnhancedViewAnimator.animate(btnWave).wave().duration(3000).start();
+            }
+        });
+
+        final View btnShake = findViewById(R.id.shake);
+        btnShake.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                EnhancedViewAnimator.animate(btnShake).shake().duration(3000).start();
             }
         });
     }
