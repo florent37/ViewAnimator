@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.ben-manes.versions'
 
 android {
@@ -9,9 +11,11 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName PROJ_VERSION
+        versionName "1.0"
     }
 }
+
+version = "1.0.1"
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -20,5 +24,112 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
 }
 
-if (hasProperty("bintrayUser") || hasProperty("BINTRAY_USER"))
-    apply from: 'https://raw.githubusercontent.com/msdx/gradle-publish/master/bintray.gradle'
+//https://github.com/danielemaddaluno/gradle-jcenter-publish
+
+// ./gradlew install bintrayUpload
+
+
+def siteUrl = 'https://github.com/florent37/ViewAnimator'      // Homepage URL of the library
+def gitUrl = 'https://github.com/florent37/ViewAnimator.git'   // Git repository URL
+group = "com.github.florent37"                      // Maven Group ID for the artifact
+
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                // Add your description here
+                name 'ViewAnimator'
+                description = ''
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'florent37'
+                        name 'Florent Champigny'
+                        email 'champigny.florent@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task jar(type: Jar) {
+    //from android.sourceSets.main.java
+    from 'build/intermediates/classes/release/'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+File f = new File("local.properties")
+if(f.exists()) {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+// https://github.com/bintray/gradle-bintray-plugin
+bintray {
+
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        // it is the name that appears in bintray when logged
+        name = "ViewAnimator"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+        version {
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
+//            mavenCentralSync {
+//                sync = true //Optional (true by default). Determines whether to sync the version to Maven Central.
+//                user = properties.getProperty("bintray.oss.user") //OSS user token
+//                password = properties.getProperty("bintray.oss.password") //OSS user password
+//                close = '1' //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+//            }
+        }
+    }
+}
