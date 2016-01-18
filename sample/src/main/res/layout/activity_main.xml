@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/percent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -35,7 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:adjustViewBounds="true"
             android:src="@drawable/github"/>
 
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -70,6 +70,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Width / Height"/>
+
+        <Button
+            android:id="@+id/wave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wave"/>
+
+        <Button
+                android:id="@+id/shake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shake"/>
     </LinearLayout>
 
 </RelativeLayout>

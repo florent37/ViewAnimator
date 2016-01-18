@@ -43,6 +43,20 @@ public class MainActivity extends AppCompatActivity {
                 animateSequentially();
             }
         });
+
+        final View btnWave = findViewById(R.id.wave);
+        btnWave.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                ViewAnimator.animate(btnWave).wave().duration(3000).start();
+            }
+        });
+
+        final View btnShake = findViewById(R.id.shake);
+        btnShake.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                ViewAnimator.animate(btnShake).shake().duration(3000).start();
+            }
+        });
     }
 
     protected void simpleAnimation(){

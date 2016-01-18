@@ -9,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-         versionName PROJ_VERSION
+        versionName PROJ_VERSION
     }
 }
 
@@ -18,5 +18,5 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
 }
 
-if(hasProperty("bintrayUser") || hasProperty("BINTRAY_USER"))
+if (hasProperty("bintrayUser") || hasProperty("BINTRAY_USER"))
     apply from: 'https://raw.githubusercontent.com/msdx/gradle-publish/master/bintray.gradle'

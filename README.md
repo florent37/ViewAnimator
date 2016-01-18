@@ -134,6 +134,15 @@ ViewAnimator
        .start();
 ```
 
+Enhanced animations (Thanks https://github.com/daimajia/AndroidViewAnimations)   
+```java
+ViewAnimator.animate(view).wave().duration(3000).start();
+```
+```java
+ViewAnimator.animate(view).shake().duration(3000).start();
+```
+...   
+[![Preview](/EnhancedAnimations.gif)
 
 #Download
 
