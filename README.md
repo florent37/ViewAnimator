@@ -142,7 +142,7 @@ ViewAnimator.animate(view).wave().duration(3000).start();
 ViewAnimator.animate(view).shake().duration(3000).start();
 ```
 ...   
-[![Preview](/EnhancedAnimations.gif)
+![Preview](/EnhancedAnimations.gif)
 
 #Download
 
