@@ -14,6 +14,13 @@
             <option value="$PROJECT_DIR$/viewanimator" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/viewanimator" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

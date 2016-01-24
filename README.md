@@ -1,7 +1,7 @@
 ViewAnimator
 =======
 
-[![API](https://img.shields.io/badge/API-9%2B-green.svg)](https://github.com/florent37/ViewAnimator)
+[![API](https://img.shields.io/badge/API-9%2B-green.svg)](https://github.com/florent37/ViewAnimator/tree/master)
 [![API](https://img.shields.io/badge/API-14%2B-green.svg)](https://github.com/florent37/ViewAnimator/tree/API14+)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ViewAnimator-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2942)
 
