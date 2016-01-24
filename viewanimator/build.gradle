@@ -9,12 +9,13 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
-         versionName PROJ_VERSION
+        versionName PROJ_VERSION
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-annotations:23.1.1'
 }
 
 if(hasProperty("bintrayUser") || hasProperty("BINTRAY_USER"))
