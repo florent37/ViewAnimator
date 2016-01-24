@@ -9,6 +9,7 @@ import android.graphics.PathMeasure;
 import android.support.annotation.IntRange;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
@@ -628,7 +629,9 @@ public class AnimationBuilder {
      * @return the animation builder
      */
     public AnimationBuilder shake() {
-        return translationX(0, 25, -25, 25, -25, 15, -15, 6, -6, 0);
+        translationX(0, 25, -25, 25, -25, 15, -15, 6, -6, 0);
+        interpolator(new CycleInterpolator(5));
+        return this;
     }
 
     /**
@@ -722,6 +725,85 @@ public class AnimationBuilder {
         scaleX(1, 0.3f, 0);
         scaleY(1, 0.3f, 0);
         alpha(1, 0, 0);
+        return this;
+    }
+
+    /**
+     * 大转盘。以下几个特效参见：https://github.com/sd6352051/NiftyDialogEffects
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder fall() {
+        rotation(1080, 720, 360, 0);
+        return this;
+    }
+
+    /**
+     * 报纸
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder newsPaper() {
+        alpha(0, 1);
+        scaleX(0.1f, 0.5f, 1);
+        scaleY(0.1f, 0.5f, 1);
+        return this;
+    }
+
+    /**
+     * 撕裂
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder slit() {
+        rotationY(90, 88, 88, 45, 0);
+        alpha(0, 0.4f, 0.8f, 1);
+        scaleX(0, 0.5f, 0.9f, 0.9f, 1);
+        scaleY(0, 0.5f, 0.9f, 0.9f, 1);
+        return this;
+    }
+
+    /**
+     * 从左边滑出
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder slideLeft() {
+        translationX(-300, 0);
+        alpha(0, 1);
+        return this;
+    }
+
+    /**
+     * 从右边滑出
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder slideRight() {
+        translationX(300, 0);
+        alpha(0, 1);
+        return this;
+    }
+
+    /**
+     * 从顶部滑出
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder slideTop() {
+        translationY(-300, 0);
+        alpha(0, 1);
+        return this;
+    }
+
+    /**
+     * 从底部滑出
+     *
+     * @return the animation builder
+     */
+    public AnimationBuilder slideBottom() {
+        translationY(300, 0);
+        alpha(0, 1);
         return this;
     }
 
