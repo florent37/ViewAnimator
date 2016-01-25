@@ -136,6 +136,7 @@ ViewAnimator
 ```
 
 Enhanced animations (Thanks [AndroidViewAnimators](https://github.com/daimajia/AndroidViewAnimators),[NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects))   
+![screenshots](/EnhancedAnimations.gif)   
 ```java
                 int random = new Random().nextInt(10);
                 final ViewGroup viewGroup = (ViewGroup) v.getParent();
@@ -198,7 +199,6 @@ Path animations (Read http://blog.csdn.net/tianjian4592/article/details/47067161
 ```
 
 SVG path animations (Read http://www.w3school.com.cn/svg/svg_path.asp)   
-![screenshots](/screenshots/svg_path.jpg)   
 ```html
 <svg width="100%" height="100%">
     <path
