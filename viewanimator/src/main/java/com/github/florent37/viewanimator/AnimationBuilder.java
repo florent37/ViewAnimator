@@ -1,9 +1,11 @@
 package com.github.florent37.viewanimator;
 
-import android.animation.Animator;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ArgbEvaluator;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.view.ViewHelper;
+
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.support.annotation.IntRange;
@@ -180,7 +182,7 @@ public class AnimationBuilder {
      */
     public AnimationBuilder pivotX(float pivotX) {
         for (View view : views) {
-            view.setPivotX(pivotX);
+            ViewHelper.setPivotX(view,pivotX);
         }
         return this;
     }
@@ -193,7 +195,7 @@ public class AnimationBuilder {
      */
     public AnimationBuilder pivotY(float pivotY) {
         for (View view : views) {
-            view.setPivotY(pivotY);
+            ViewHelper.setPivotY(view, pivotY);
         }
         return this;
     }
@@ -495,20 +497,10 @@ public class AnimationBuilder {
         return waitForHeight;
     }
 
-    /**
-     * 弹跳。以下几个方法参见：https://github.com/daimajia/AndroidViewAnimators
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder bounce() {
         return translationY(0, 0, -30, 0, -15, 0, 0);
     }
 
-    /**
-     * 弹跳进来
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder bounceIn() {
         alpha(0, 1, 1, 1);
         scaleX(0.3f, 1.05f, 0.9f, 1);
@@ -516,11 +508,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 弹跳出去
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder bounceOut() {
         scaleY(1, 0.9f, 1.05f, 0.3f);
         scaleX(1, 0.9f, 1.05f, 0.3f);
@@ -528,56 +515,26 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 淡入
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder fadeIn() {
         return alpha(0, 0.25f, 0.5f, 0.75f, 1);
     }
 
-    /**
-     * 淡出
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder fadeOut() {
         return alpha(1, 0.75f, 0.5f, 0.25f, 0);
     }
 
-    /**
-     * 闪现
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder flash() {
         return alpha(1, 0, 1, 0, 1);
     }
 
-    /**
-     * 水平翻转
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder flipHorizontal() {
         return rotationX(90, -15, 15, 0);
     }
 
-    /**
-     * 垂直翻转
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder flipVertical() {
         return rotationY(90, -15, 15, 0);
     }
 
-    /**
-     * 脉搏
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder pulse() {
         scaleY(1, 1.1f, 1);
         scaleX(1, 1.1f, 1);
@@ -585,7 +542,7 @@ public class AnimationBuilder {
     }
 
     /**
-     * 滚动进来。Only support single view
+     * Only support single view
      *
      * @return the animation builder
      */
@@ -598,11 +555,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 滚动出去
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder rollOut() {
         for (View view : views) {
             alpha(1, 0);
@@ -612,22 +564,12 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 扭转
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder rubber() {
         scaleX(1, 1.25f, 0.75f, 1.15f, 1);
         scaleY(1, 0.75f, 1.25f, 0.85f, 1);
         return this;
     }
 
-    /**
-     * 抖动
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder shake() {
         translationX(0, 25, -25, 25, -25, 15, -15, 6, -6, 0);
         interpolator(new CycleInterpolator(5));
@@ -635,7 +577,6 @@ public class AnimationBuilder {
     }
 
     /**
-     * 直立起来
      *
      * @return the animation builder
      */
@@ -651,11 +592,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 摇摆
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder swing() {
         return rotation(0, 10, -10, 6, -6, 3, -3, 0);
     }
@@ -672,11 +608,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 波浪
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder wave() {
         for (View view : views) {
             float x = (view.getWidth() - view.getPaddingLeft() - view.getPaddingRight()) / 2
@@ -689,11 +620,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 游移不定
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder wobble() {
         for (View view : views) {
             float width = view.getWidth();
@@ -704,11 +630,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 缩放进入
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder zoomIn() {
         scaleX(0.45f, 1);
         scaleY(0.45f, 1);
@@ -716,11 +637,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 缩放出去
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder zoomOut() {
         scaleX(1, 0.3f, 0);
         scaleY(1, 0.3f, 0);
@@ -738,11 +654,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 报纸
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder newsPaper() {
         alpha(0, 1);
         scaleX(0.1f, 0.5f, 1);
@@ -750,11 +661,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 撕裂
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder slit() {
         rotationY(90, 88, 88, 45, 0);
         alpha(0, 0.4f, 0.8f, 1);
@@ -763,44 +669,24 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 从左边滑出
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder slideLeft() {
         translationX(-300, 0);
         alpha(0, 1);
         return this;
     }
 
-    /**
-     * 从右边滑出
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder slideRight() {
         translationX(300, 0);
         alpha(0, 1);
         return this;
     }
 
-    /**
-     * 从顶部滑出
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder slideTop() {
         translationY(-300, 0);
         alpha(0, 1);
         return this;
     }
 
-    /**
-     * 从底部滑出
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder slideBottom() {
         translationY(300, 0);
         alpha(0, 1);
