@@ -231,7 +231,7 @@ Add into your **build.gradle**
 [![Download](https://api.bintray.com/packages/florent37/maven/ViewAnimator/images/download.svg)](https://bintray.com/florent37/maven/ViewAnimator/_latestVersion)
 
 ```groovy
-compile 'com.github.florent37:viewanimator:1.0.1@aar'
+compile 'com.github.florent37:viewanimator:1.0.2@aar'
 compile 'com.nineoldandroids:library:2.4.0'
 ```
 
