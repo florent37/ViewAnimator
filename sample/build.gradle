@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion project.COMPILE_SDK
+    buildToolsVersion project.BUILD_TOOL
 
     defaultConfig {
         applicationId "com.github.florent37.viewanimator"
-        minSdkVersion 9
-        targetSdkVersion 23
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.TARGET_SDK
+
         versionCode 1
         versionName "1.0"
     }
