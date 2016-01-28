@@ -1,11 +1,5 @@
 package com.github.florent37.viewanimator;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.ArgbEvaluator;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
-
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.support.annotation.IntRange;
@@ -15,6 +9,12 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ArgbEvaluator;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.view.ViewHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +23,11 @@ import java.util.List;
  * Modified by gzu-liyujiang on 24/01/2016.
  */
 public class AnimationBuilder {
-    private boolean waitForHeight;
-    private boolean nextValueWillBeDp = false;
     private final ViewAnimator viewAnimator;
     private final View[] views;
     private final List<Animator> animatorList = new ArrayList<Animator>();
+    private boolean waitForHeight;
+    private boolean nextValueWillBeDp = false;
 
     /**
      * Instantiates a new Animation builder.
@@ -182,7 +182,7 @@ public class AnimationBuilder {
      */
     public AnimationBuilder pivotX(float pivotX) {
         for (View view : views) {
-            ViewHelper.setPivotX(view,pivotX);
+            ViewHelper.setPivotX(view, pivotX);
         }
         return this;
     }
@@ -201,41 +201,21 @@ public class AnimationBuilder {
     }
 
     /**
-     * Pivot x animation builder.
+     * Rotation x animation builder.
      *
-     * @param pivotX the pivot x
+     * @param pivotX the rotation x
      * @return the animation builder
      */
     public AnimationBuilder pivotX(float... pivotX) {
-        return custom(new AnimationListener.Update() {
-            @Override
-            public void update(View view, float value) {
-                pivotX(value);
-            }
-        }, pivotX);
+        ObjectAnimator.ofFloat(getView(), "pivotX", getValues(pivotX));
+        return this;
     }
 
-    /**
-     * Pivot y animation builder.
-     *
-     * @param pivotY the pivot y
-     * @return the animation builder
-     */
     public AnimationBuilder pivotY(float... pivotY) {
-        return custom(new AnimationListener.Update() {
-            @Override
-            public void update(View view, float value) {
-                pivotY(value);
-            }
-        }, pivotY);
+        ObjectAnimator.ofFloat(getView(), "pivotY", getValues(pivotY));
+        return this;
     }
 
-    /**
-     * Rotation x animation builder.
-     *
-     * @param rotationX the rotation x
-     * @return the animation builder
-     */
     public AnimationBuilder rotationX(float... rotationX) {
         return property("rotationX", rotationX);
     }
@@ -577,7 +557,6 @@ public class AnimationBuilder {
     }
 
     /**
-     *
      * @return the animation builder
      */
     public AnimationBuilder standUp() {
@@ -712,8 +691,8 @@ public class AnimationBuilder {
                 pathMeasure.getPosTan(value, currentPosition, null);
                 final float x = currentPosition[0];
                 final float y = currentPosition[1];
-                view.setX(x);
-                view.setY(y);
+                ViewHelper.setX(view,x);
+                ViewHelper.setY(view,y);
                 Log.d(null, "path: value=" + value + ", x=" + x + ", y=" + y);
             }
         }, 0, pathMeasure.getLength());

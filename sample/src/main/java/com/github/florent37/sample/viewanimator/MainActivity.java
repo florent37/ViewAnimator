@@ -130,6 +130,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ViewAnimator.animate(v).svgPath(SVG_PATH).duration(10000).repeatCount(3).start();
+
+                final View btnWave = findViewById(R.id.wave);
+                btnWave.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        ViewAnimator.animate(btnWave).wave().duration(3000).start();
+                    }
+                });
+
+                final View btnShake = findViewById(R.id.shake);
+                btnShake.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        ViewAnimator.animate(btnShake).shake().duration(3000).start();
+                    }
+                });
             }
         });
     }
