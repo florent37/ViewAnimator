@@ -11,14 +11,15 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName PROJ_VERSION
     }
 }
 
 version = "1.0.1"
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-annotations:23.1.1'
     compile 'com.nineoldandroids:library:2.4.0'
 }
 
