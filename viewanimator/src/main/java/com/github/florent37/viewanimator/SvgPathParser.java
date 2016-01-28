@@ -6,7 +6,7 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 /**
- * SVG的path标签的d属性值解析，如：
+ * SVG Path Parser
  * &lt;path d="M250 150 L150 350 L350 350 Z" /&gt;
  * <p/>
  * Author:李玉江[QQ:1032694760]
