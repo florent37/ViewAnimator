@@ -24,7 +24,7 @@ dependencies {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'GlidePalette'
+    bintrayName = 'ViewAnimator'
     orgName = 'florent37'
 
     publishedGroupId = 'com.github.florent37'
