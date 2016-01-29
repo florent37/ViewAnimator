@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion project.COMPILE_SDK
+    buildToolsVersion project.BUILD_TOOL
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.TARGET_SDK
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
+    compile project(':viewanimator')
+}
