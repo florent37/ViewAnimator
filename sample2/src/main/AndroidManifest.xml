@@ -12,7 +12,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,NewApi">
         <activity
             android:name=".WelcomeActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

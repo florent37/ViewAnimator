@@ -239,6 +239,10 @@ public class AnimationBuilder {
         return this;
     }
 
+    public ViewAnimator build() {
+        return viewAnimator;
+    }
+
     public void start() {
         viewAnimator.start();
     }
@@ -440,6 +444,9 @@ public class AnimationBuilder {
         return custom(new AnimationListener.Update() {
             @Override
             public void update(View view, float value) {
+                if (view == null) {
+                    return;
+                }
                 float[] currentPosition = new float[2];
                 pathMeasure.getPosTan(value, currentPosition, null);
                 final float x = currentPosition[0];

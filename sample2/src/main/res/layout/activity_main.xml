@@ -212,12 +212,11 @@
         android:contentDescription="@null"
         android:src="@mipmap/snow" />
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/animation_heart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:contentDescription="@null"
-        android:src="@mipmap/heart" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:orientation="horizontal" />
 
 </FrameLayout>

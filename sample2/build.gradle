@@ -5,6 +5,7 @@ android {
     buildToolsVersion project.BUILD_TOOL
 
     defaultConfig {
+        applicationId "cn.qqtheme.AnimatorSample"
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.TARGET_SDK
 

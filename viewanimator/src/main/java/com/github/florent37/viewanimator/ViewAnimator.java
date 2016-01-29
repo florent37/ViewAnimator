@@ -3,6 +3,7 @@ package com.github.florent37.viewanimator;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ValueAnimator;
+
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.view.View;
@@ -44,7 +45,7 @@ public class ViewAnimator {
     @IntDef(flag = false, value = {RESTART, REVERSE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface RepeatMode {
-        //代替enum，据说枚举类极其耗费内存
+        // use this instead enum, I heard that the enumeration will take a lot of memory
     }
 
     public static AnimationBuilder animate(View... view) {
@@ -123,7 +124,7 @@ public class ViewAnimator {
         return animatorSet;
     }
 
-    public ViewAnimator start() {
+    public void start() {
         if (prev != null) {
             prev.start();
         } else {
@@ -142,7 +143,6 @@ public class ViewAnimator {
                 animatorSet.start();
             }
         }
-        return this;
     }
 
     public void cancel() {
@@ -166,7 +166,7 @@ public class ViewAnimator {
     }
 
     /**
-     * Repeat count of animation. -1 or ValueAnimator.INFINITE will repeat forever
+     * -1 or ValueAnimator.INFINITE will repeat forever
      *
      * @param repeatCount the repeat count
      * @return the view animation
@@ -177,7 +177,7 @@ public class ViewAnimator {
     }
 
     /**
-     * Repeat mode of animation. ValueAnimator.RESTART or ValueAnimator.REVERSE
+     * ValueAnimator.RESTART or ValueAnimator.REVERSE
      *
      * @param repeatMode the repeat mode
      * @return the view animation
@@ -198,7 +198,7 @@ public class ViewAnimator {
     }
 
     /**
-     * Interpolator for animator, see https://github.com/cimi-chen/EaseInterpolator
+     * see https://github.com/cimi-chen/EaseInterpolator
      *
      * @param interpolator the interpolator
      * @return the view animator
