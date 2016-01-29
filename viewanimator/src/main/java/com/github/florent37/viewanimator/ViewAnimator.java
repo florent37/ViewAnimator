@@ -3,6 +3,7 @@ package com.github.florent37.viewanimator;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ValueAnimator;
+
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.view.View;
@@ -19,6 +20,9 @@ import java.util.List;
  * Modified by gzu-liyujiang on 24/01/2016.
  */
 public class ViewAnimator {
+    public static final int RESTART = ValueAnimator.RESTART;
+    public static final int REVERSE = ValueAnimator.REVERSE;
+    public static final int INFINITE = ValueAnimator.INFINITE;
     private static final long DEFAULT_DURATION = 3000;
 
     private List<AnimationBuilder> animationList = new ArrayList<>();
@@ -27,7 +31,7 @@ public class ViewAnimator {
     private Interpolator interpolator = null;
 
     private int repeatCount = 0;
-    private int repeatMode = ValueAnimator.RESTART;
+    private int repeatMode = RESTART;
 
     private AnimatorSet animatorSet;
     private View waitForThisViewHeight = null;
@@ -38,13 +42,10 @@ public class ViewAnimator {
     private ViewAnimator prev = null;
     private ViewAnimator next = null;
 
-    /**
-     * The interface Repeat mode.
-     */
-    @IntDef(flag = false, value = {ValueAnimator.RESTART, ValueAnimator.REVERSE})
+    @IntDef(flag = false, value = {RESTART, REVERSE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface RepeatMode {
-        //代替enum，据说枚举类极其耗费内存
+        // use this instead enum, I heard that the enumeration will take a lot of memory
     }
 
     public static AnimationBuilder animate(View... view) {
@@ -123,7 +124,7 @@ public class ViewAnimator {
         return animatorSet;
     }
 
-    public ViewAnimator start() {
+    public void start() {
         if (prev != null) {
             prev.start();
         } else {
@@ -142,7 +143,6 @@ public class ViewAnimator {
                 animatorSet.start();
             }
         }
-        return this;
     }
 
     public void cancel() {
@@ -155,18 +155,18 @@ public class ViewAnimator {
         }
     }
 
-    public ViewAnimator duration(long duration) {
+    public ViewAnimator duration(@IntRange(from = 1) long duration) {
         this.duration = duration;
         return this;
     }
 
-    public ViewAnimator startDelay(long startDelay) {
+    public ViewAnimator startDelay(@IntRange(from = 0) long startDelay) {
         this.startDelay = startDelay;
         return this;
     }
 
     /**
-     * Repeat count of animation.
+     * -1 or ValueAnimator.INFINITE will repeat forever
      *
      * @param repeatCount the repeat count
      * @return the view animation
@@ -177,7 +177,7 @@ public class ViewAnimator {
     }
 
     /**
-     * Repeat mode view animation.
+     * ValueAnimator.RESTART or ValueAnimator.REVERSE
      *
      * @param repeatMode the repeat mode
      * @return the view animation
@@ -198,11 +198,10 @@ public class ViewAnimator {
     }
 
     /**
-     * Interpolator view animator.
+     * see https://github.com/cimi-chen/EaseInterpolator
      *
      * @param interpolator the interpolator
      * @return the view animator
-     * @link https://github.com/cimi-chen/EaseInterpolator
      */
     public ViewAnimator interpolator(Interpolator interpolator) {
         this.interpolator = interpolator;

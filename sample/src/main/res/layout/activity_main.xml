@@ -67,35 +67,6 @@
             android:layout_height="wrap_content"
             android:text="Width / Height"/>
 
-        <Button
-            android:id="@+id/enhanced"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="enhanced animation"/>
-
-        <Button
-            android:id="@+id/path"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="path animation"/>
-
-        <Button
-            android:id="@+id/svgPath"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="svg path animation"/>
-
-        <Button
-            android:id="@+id/wave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Wave"/>
-
-        <Button
-            android:id="@+id/shake"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Shake"/>
     </LinearLayout>
 
 </RelativeLayout>
