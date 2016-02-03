@@ -5,7 +5,9 @@ import android.graphics.PathMeasure;
 import android.support.annotation.IntRange;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.CycleInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
@@ -441,6 +443,14 @@ public class AnimationBuilder {
     public AnimationBuilder interpolator(Interpolator interpolator) {
         viewAnimator.interpolator(interpolator);
         return this;
+    }
+
+    public ViewAnimator accelerate() {
+        return viewAnimator.interpolator(new AccelerateInterpolator());
+    }
+
+    public ViewAnimator descelerate() {
+        return viewAnimator.interpolator(new DecelerateInterpolator());
     }
 
     /**

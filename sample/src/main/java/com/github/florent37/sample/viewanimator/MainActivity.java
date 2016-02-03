@@ -210,5 +210,9 @@ public class MainActivity extends AppCompatActivity {
                 .interpolator(new AccelerateInterpolator())
                 .duration(1200)
                 .start();
+
+        ViewAnimator
+                .animate(image).scaleX(0, 1).scaleY(0, 1).alpha(0, 1).descelerate().duration(500)
+                .thenAnimate(image).scaleX(1, 0).scaleY(1, 0).alpha(1, 0).accelerate().duration(500);
     }
 }
