@@ -21,7 +21,7 @@ ext{
     COMPILE_SDK=23
     TARGET_SDK=23
     BUILD_TOOL="23.0.2"
-    minSdkVersion = 9
+    minSdkVersion = 11
     sourceCompatibilityVersion = JavaVersion.VERSION_1_7
     targetCompatibilityVersion = JavaVersion.VERSION_1_7
 
