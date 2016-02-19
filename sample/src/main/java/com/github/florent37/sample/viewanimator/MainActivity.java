@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     .alpha(0,1)
                 .andAnimate(text)
                     .translationX(-200, 0)
-                .descelerate()
+                .decelerate()
                 .duration(2000)
 
                 .thenAnimate(mountain)
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     .backgroundColor(Color.WHITE, Color.BLACK)
 
                 .waitForHeight()
-                .descelerate()
+                .decelerate()
                 .duration(2000)
 
                 .thenAnimate(percent)
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 .animate(image)
                     .dp().width(100f,150f)
                     .alpha(1,0.1f)
-                    .descelerate()
+                    .decelerate()
                     .duration(800)
                 .thenAnimate(image)
                     .dp().width(150f,100f)
