@@ -11,6 +11,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -169,17 +170,17 @@ public class MainActivity extends AppCompatActivity {
         ViewAnimator.animate(mountain, image)
                 .dp().translationY(-1000, 0)
                 .alpha(0, 1)
+                .singleInterpolator(new OvershootInterpolator())
 
                 .andAnimate(percent)
                 .scale(0, 1)
 
                 .andAnimate(text)
-                .dp().translationY(1000, 0)
                 .textColor(Color.BLACK, Color.WHITE)
                 .backgroundColor(Color.WHITE, Color.BLACK)
 
                 .waitForHeight()
-                .interpolator(new AccelerateDecelerateInterpolator())
+                .singleInterpolator(new AccelerateDecelerateInterpolator())
                 .duration(2000)
 
                 .thenAnimate(percent)
