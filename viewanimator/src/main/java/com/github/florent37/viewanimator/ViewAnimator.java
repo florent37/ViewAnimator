@@ -75,7 +75,7 @@ public class ViewAnimator {
                     animator.setInterpolator(animationBuilder.getSingleInterpolator());
                 }
             }
-            animators.addAll(animationBuilder.createAnimators());
+            animators.addAll(animatorList);
         }
 
         for (AnimationBuilder animationBuilder : animationList) {
