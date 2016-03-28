@@ -15,18 +15,16 @@ Animate multiple view from one method
 ```java
 ViewAnimator
        .animate(image)
-           .translationY(-1000, 0)
-           .alpha(0,1)
+       .translationY(-1000, 0)
+       .alpha(0,1)
        .andAnimate(text)
-           .dp().translationX(-20, 0)
+       .dp().translationX(-20, 0)
        .descelerate()
        .duration(2000)
-
        .thenAnimate(image)
-            .scale(1f,0.5f,1f)
+       .scale(1f,0.5f,1f)
        .accelerate()
        .duration(1000)
-
        .start();
        
 ```
@@ -70,7 +68,6 @@ Add same animation on multiples view
 ViewAnimator
        .animate(image,text)
        .scale(0,1)
-
        .start();
 ```
 
@@ -79,10 +76,8 @@ Add listeners
 ViewAnimator
        .animate(image)
        .scale(0,1)
-
        .onStart(() -> {})
        .onStop(() -> {})
-
        .start();
 
 ```
@@ -91,7 +86,7 @@ Use DP values
 ```java
 ViewAnimator
        .animate(image)
-           .dp().translationY(-200, 0)
+       .dp().translationY(-200, 0)
        .start();
 ```
 
@@ -99,9 +94,9 @@ Animate Height / Width
 ```java
 ViewAnimator
        .animate(view)
-           .waitForHeight() //wait until a ViewTreeObserver notification
-           .dp().width(100,200)
-           .dp().height(50,100)
+       .waitForHeight() //wait until a ViewTreeObserver notification
+       .dp().width(100,200)
+       .dp().height(50,100)
        .start();
 ```
 
@@ -109,8 +104,8 @@ Color animations
 ```java
 ViewAnimator
        .animate(view)
-            .textColor(Color.BLACK,Color.GREEN)
-            .backgroundColor(Color.WHITE,Color.BLACK)
+       .textColor(Color.BLACK,Color.GREEN)
+       .backgroundColor(Color.WHITE,Color.BLACK)
        .start();
 ```
 
@@ -118,7 +113,7 @@ Rotation animations
 ```java
 ViewAnimator
        .animate(view)
-            .rotation(360)
+       .rotation(360)
        .start();
 ```
 
@@ -126,11 +121,11 @@ Custom animations
 ```java
 ViewAnimator
        .animate(text)
-           .custom(new AnimationListener.Update<TextView>() {
-               @Override public void update(TextView view, float value) {
-                   view.setText(String.format("%.02f",value));
-               }
-           }, 0, 1)
+       .custom(new AnimationListener.Update<TextView>() {
+            @Override public void update(TextView view, float value) {
+                  view.setText(String.format("%.02f",value));
+            }
+        }, 0, 1)
        .start();
 ```
 
