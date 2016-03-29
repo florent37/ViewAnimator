@@ -30,6 +30,7 @@ public class AnimationBuilder {
     private final List<Animator> animatorList = new ArrayList<Animator>();
     private boolean waitForHeight;
     private boolean nextValueWillBeDp = false;
+    private Interpolator singleInterpolator = null;
 
     /**
      * Instantiates a new Animation builder.
@@ -443,6 +444,15 @@ public class AnimationBuilder {
     public AnimationBuilder interpolator(Interpolator interpolator) {
         viewAnimator.interpolator(interpolator);
         return this;
+    }
+
+    public AnimationBuilder singleInterpolator(Interpolator interpolator) {
+        singleInterpolator = interpolator;
+        return this;
+    }
+
+    public Interpolator getSingleInterpolator() {
+        return singleInterpolator;
     }
 
     public ViewAnimator accelerate() {

@@ -1,13 +1,14 @@
 package com.github.florent37.viewanimator;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ValueAnimator;
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
+
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ValueAnimator;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -68,7 +69,13 @@ public class ViewAnimator {
     protected AnimatorSet createAnimatorSet() {
         List<Animator> animators = new ArrayList<>();
         for (AnimationBuilder animationBuilder : animationList) {
-            animators.addAll(animationBuilder.createAnimators());
+            List<Animator> animatorList = animationBuilder.createAnimators();
+            if (animationBuilder.getSingleInterpolator() != null) {
+                for (Animator animator : animatorList) {
+                    animator.setInterpolator(animationBuilder.getSingleInterpolator());
+                }
+            }
+            animators.addAll(animatorList);
         }
 
         for (AnimationBuilder animationBuilder : animationList) {
