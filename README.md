@@ -15,16 +15,16 @@ Animate multiple view from one method
 ```java
 ViewAnimator
        .animate(image)
-       .translationY(-1000, 0)
-       .alpha(0,1)
+            .translationY(-1000, 0)
+            .alpha(0,1)
        .andAnimate(text)
-       .dp().translationX(-20, 0)
-       .descelerate()
-       .duration(2000)
+            .dp().translationX(-20, 0)
+            .descelerate()
+            .duration(2000)
        .thenAnimate(image)
-       .scale(1f,0.5f,1f)
-       .accelerate()
-       .duration(1000)
+            .scale(1f,0.5f,1f)
+            .accelerate()
+            .duration(1000)
        .start();
        
 ```
@@ -145,7 +145,7 @@ Enhanced animations ( Thanks [AndroidViewAnimators](https://github.com/daimajia/
 .swing();
 .wobble();
 ```
-...   
+...
 ![Preview](/EnhancedAnimations.gif)
 
 Path animations ( Read http://blog.csdn.net/tianjian4592/article/details/47067161 )   
