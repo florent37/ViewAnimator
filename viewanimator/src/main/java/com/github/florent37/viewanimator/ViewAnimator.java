@@ -1,14 +1,13 @@
 package com.github.florent37.viewanimator;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ValueAnimator;
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
-
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
