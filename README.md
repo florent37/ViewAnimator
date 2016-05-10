@@ -129,8 +129,10 @@ ViewAnimator
        .start();
 ```
 
-Enhanced animations (Thanks [AndroidViewAnimators](https://github.com/daimajia/AndroidViewAnimators),[NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects))   
+Enhanced animations ( Thanks [AndroidViewAnimators](https://github.com/daimajia/AndroidViewAnimators), [NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects) )   
+
 ![screenshots](/screenshots/enhanced.gif)
+
 ```java
 .shake().interpolator(new LinearInterpolator());
 .bounceIn().interpolator(new BounceInterpolator());
@@ -144,9 +146,9 @@ Enhanced animations (Thanks [AndroidViewAnimators](https://github.com/daimajia/A
 .wobble();
 ```
 ...   
-[![Preview](/EnhancedAnimations.gif)
+![Preview](/EnhancedAnimations.gif)
 
-Path animations (Read http://blog.csdn.net/tianjian4592/article/details/47067161)   
+Path animations ( Read http://blog.csdn.net/tianjian4592/article/details/47067161 )   
 ```java
     final int[] START_POINT = new int[]{ 300, 270 };
     final int[] BOTTOM_POINT = new int[]{ 300, 400 };
@@ -160,8 +162,10 @@ Path animations (Read http://blog.csdn.net/tianjian4592/article/details/47067161
     ViewAnimator.animate(view).path(path).repeatCount(2).start();
 ```
 
-SVG path animations (Read http://www.w3school.com.cn/svg/svg_path.asp)   
+SVG path animations (Read http://www.w3school.com.cn/svg/svg_path.asp)
+
 ![screenshots](/screenshots/svg_path.jpg)   
+
 ```html
 <svg width="100%" height="100%">
     <path
@@ -202,7 +206,7 @@ Contributor: [李玉江(liyujiang)](https://github.com/gzu-liyujiang/ViewAnimato
   <img alt="Follow me on Twitter"
        src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/twitter.png" />
 </a>
-<a href="https://www.linkedin.com/profile/view?id=297860624">
+<a href="https://fr.linkedin.com/in/florentchampigny">
   <img alt="Follow me on LinkedIn"
        src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/linkedin.png" />
 </a>
