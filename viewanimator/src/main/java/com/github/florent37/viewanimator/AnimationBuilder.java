@@ -458,15 +458,16 @@ public class AnimationBuilder {
         return viewAnimator.interpolator(new AccelerateInterpolator());
     }
 
-    public ViewAnimator descelerate() {
+    public ViewAnimator decelerate() {
         return viewAnimator.interpolator(new DecelerateInterpolator());
     }
 
     /**
      * Start.
      */
-    public void start() {
+    public ViewAnimator start() {
         viewAnimator.start();
+        return viewAnimator;
     }
 
     /**

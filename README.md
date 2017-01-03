@@ -19,7 +19,7 @@ ViewAnimator
             .alpha(0,1)
        .andAnimate(text)
             .dp().translationX(-20, 0)
-            .descelerate()
+            .decelerate()
             .duration(2000)
        .thenAnimate(image)
             .scale(1f, 0.5f, 1f)
@@ -185,7 +185,7 @@ Add into your **build.gradle**
 [![Download](https://api.bintray.com/packages/florent37/maven/ViewAnimator/images/download.svg)](https://bintray.com/florent37/maven/ViewAnimator/_latestVersion)
 
 ```groovy
-compile 'com.github.florent37:viewanimator:1.0.4'
+compile 'com.github.florent37:viewanimator:1.0.5'
 ```
 
 #Community

@@ -3,6 +3,8 @@ package com.github.florent37.sample.viewanimator;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void animateParallel() {
-        ViewAnimator.animate(mountain, image)
+        final ViewAnimator viewAnimator = ViewAnimator.animate(mountain, image)
                 .dp().translationY(-1000, 0)
                 .alpha(0, 1)
                 .singleInterpolator(new OvershootInterpolator())
@@ -197,6 +199,13 @@ public class MainActivity extends AppCompatActivity {
                 .duration(5000)
 
                 .start();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                viewAnimator.cancel();
+            }
+        }, 3000);
     }
 
     protected void animateSequentially() {
@@ -213,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 .start();
 
         ViewAnimator
-                .animate(image).scaleX(0, 1).scaleY(0, 1).alpha(0, 1).descelerate().duration(500)
+                .animate(image).scaleX(0, 1).scaleY(0, 1).alpha(0, 1).decelerate().duration(500)
                 .thenAnimate(image).scaleX(1, 0).scaleY(1, 0).alpha(1, 0).accelerate().duration(500);
     }
 }
