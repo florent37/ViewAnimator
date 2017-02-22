@@ -30,3 +30,5 @@ proguard/
 # intellij
 *.iml
 /*/*.iml
+
+.idea/*

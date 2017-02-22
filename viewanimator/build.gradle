@@ -1,16 +1,53 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion project.COMPILE_SDK
+    buildToolsVersion project.BUILD_TOOL
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 23
-        versionCode 2
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.TARGET_SDK
+        versionCode 1
         versionName PROJ_VERSION
     }
 }
 
-// this script was used to upload files to bintray.
-//apply from: 'https://raw.githubusercontent.com/msdx/gradle-publish/master/bintray.gradle'
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:support-annotations:23.3.0'
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'ViewAnimator'
+    orgName = 'florent37'
+
+    publishedGroupId = 'com.github.florent37'
+    libraryName = 'ViewAnimator'
+    artifact = 'viewanimator'
+
+    libraryDescription = ''
+
+    siteUrl = 'https://github.com/florent37/ViewAnimator'
+    gitUrl = 'https://github.com/florent37/ViewAnimator.git'
+
+    libraryVersion = rootProject.ext.libraryVersion
+
+    developerId = 'florent37'
+    developerName = 'florent37'
+    developerEmail = 'champigny.florent@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: rootProject.file('gradle/install-v1.gradle')
+    apply from: rootProject.file('gradle/bintray-android-v1.gradle')
+}
