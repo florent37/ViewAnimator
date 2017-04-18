@@ -8,7 +8,7 @@ A fluent Android animation library !
 
 [![png](https://raw.githubusercontent.com/florent37/ViewAnimator/master/montain_small.jpg)](https://github.com/florent37/ViewAnimator)
 
-#Usage
+# Usage
 
 Animate multiple view from one method
 
@@ -59,7 +59,7 @@ animatorSet.addListener(new AnimatorListenerAdapter(){
 animatorSet.start();
 ```
 
-#More
+# More
 
 [![gif](https://j.gifs.com/XD6R4V.gif)](https://youtu.be/Qlj40Y6ChSM)
 
@@ -188,7 +188,7 @@ final String SVG_PATH = "M 42.266949,70.444915 C 87.351695,30.995763 104.25847,2
 ViewAnimator.animate(view).svgPath(SVG_PATH).repeatCount(3).start();
 ```
 
-#Download
+# Download
 
 Add into your **build.gradle**
 
@@ -198,11 +198,11 @@ Add into your **build.gradle**
 compile 'com.github.florent37:viewanimator:1.0.5'
 ```
 
-#Community
+# Community
 
 Looking for contributors, feel free to fork !
 
-#Credits
+# Credits
 
 Author: Florent Champigny   
 Contributor: [李玉江(liyujiang)](https://github.com/gzu-liyujiang/ViewAnimator)   
@@ -220,7 +220,7 @@ Contributor: [李玉江(liyujiang)](https://github.com/gzu-liyujiang/ViewAnimato
        src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/linkedin.png" />
 </a>
 
-#License
+# License
 
     Copyright 2015 florent37, Inc.
 
