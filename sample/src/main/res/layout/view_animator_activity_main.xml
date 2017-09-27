@@ -15,7 +15,7 @@
             android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/montain" />
+            android:src="@drawable/view_animator_montain" />
 
         <TextView
             android:id="@+id/percent"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:adjustViewBounds="true"
-            android:src="@drawable/github"
+            android:src="@drawable/view_animator_github"
             android:visibility="visible" />
 
         <TextView
