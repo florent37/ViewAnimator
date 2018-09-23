@@ -160,7 +160,7 @@ Enhanced animations (Thanks [AndroidViewAnimations](https://github.com/daimajia/
 ...
 ![Preview](/EnhancedAnimations.gif)
 
-Path animations ( Read http://blog.csdn.net/tianjian4592/article/details/47067161 )   
+Path animations ( Inspiration from http://blog.csdn.net/tianjian4592/article/details/47067161 )   
 ```java
     final int[] START_POINT = new int[]{ 300, 270 };
     final int[] BOTTOM_POINT = new int[]{ 300, 400 };
@@ -182,7 +182,7 @@ SVG path animations (See simple 2, read http://www.w3school.com.cn/svg/svg_path.
 ```
 ```java
 final String SVG_PATH = "M...";
-ViewAnimator.animate(view).svgPath(SVG_PATH).repeatCount(-1).start();
+ViewAnimator.animate(view).path(SvgPathParser.tryParsePath(SVG_PATH)).repeatCount(-1).start();
 ```
 
 # Download
