@@ -4,8 +4,6 @@ import android.graphics.Path;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 
-import com.github.florent37.viewanimator.SvgPathParser;
-
 import java.util.ArrayList;
 import java.util.Random;
 

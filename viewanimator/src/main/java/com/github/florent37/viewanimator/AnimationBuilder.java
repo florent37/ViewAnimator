@@ -20,9 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Some effects thanks https://github.com/daimajia/AndroidViewAnimations
+ * and https://github.com/sd6352051/NiftyDialogEffects
+ * <p>
  * Created by florentchampigny on 22/12/2015.
  * Modified by gzu-liyujiang on 24/01/2016.
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 public class AnimationBuilder {
     private final ViewAnimator viewAnimator;
     private final View[] views;
@@ -146,7 +150,8 @@ public class AnimationBuilder {
     public AnimationBuilder textColor(int... colors) {
         for (View view : views) {
             if (view instanceof TextView) {
-                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "textColor", colors);
+                TextView textView = (TextView) view;
+                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(textView, "textColor", colors);
                 objectAnimator.setEvaluator(new ArgbEvaluator());
                 this.animatorList.add(objectAnimator);
             }
@@ -464,6 +469,10 @@ public class AnimationBuilder {
         return custom(new AnimationListener.Update() {
             @Override
             public void update(View view, float value) {
+                if (view == null) {
+                    return;
+                }
+                float[] currentPosition = new float[2];
                 pathMeasure.getPosTan(value, currentPosition, null);
                 final float x = currentPosition[0];
                 final float y = currentPosition[1];
@@ -472,10 +481,6 @@ public class AnimationBuilder {
                 Log.d(null, "path: value=" + value + ", x=" + x + ", y=" + y);
             }
         }, 0, pathMeasure.getLength());
-    }
-
-    public AnimationBuilder svgPath(String dAttributeOfPath) {
-        return path(SvgPathParser.tryParsePath(dAttributeOfPath));
     }
 
 }

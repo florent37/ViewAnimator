@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/sample2" />
             <option value="$PROJECT_DIR$/viewanimator" />
           </set>
         </option>

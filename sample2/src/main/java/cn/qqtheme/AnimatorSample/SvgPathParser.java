@@ -1,4 +1,4 @@
-package com.github.florent37.viewanimator;
+package cn.qqtheme.AnimatorSample;
 
 import android.graphics.Path;
 import android.support.annotation.Nullable;
@@ -13,6 +13,7 @@ import android.support.annotation.WorkerThread;
  * DateTime:2016/1/24 0:07
  * Builder:Android Studio
  * Link:https://github.com/pents90/svg-android
+ * Link:http://www.w3school.com.cn/svg/svg_path.asp
  */
 public class SvgPathParser {
 

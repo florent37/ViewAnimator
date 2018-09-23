@@ -3,7 +3,6 @@ package com.github.florent37.viewanimator;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
-
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.view.View;
@@ -19,6 +18,7 @@ import java.util.List;
  * Created by florentchampigny on 22/12/2015.
  * Modified by gzu-liyujiang on 24/01/2016.
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 public class ViewAnimator {
     public static final int RESTART = ValueAnimator.RESTART;
     public static final int REVERSE = ValueAnimator.REVERSE;
@@ -41,30 +41,6 @@ public class ViewAnimator {
 
     private ViewAnimator prev = null;
     private ViewAnimator next = null;
-
-    @IntDef(flag = false, value = {RESTART, REVERSE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface RepeatMode {
-        // use this instead enum, I heard that the enumeration will take a lot of memory
-    }
-
-    public static AnimationBuilder animate(View... view) {
-        ViewAnimator viewAnimator = new ViewAnimator();
-        return viewAnimator.addAnimationBuilder(view);
-    }
-
-    public AnimationBuilder thenAnimate(View... views) {
-        ViewAnimator nextViewAnimator = new ViewAnimator();
-        this.next = nextViewAnimator;
-        nextViewAnimator.prev = this;
-        return nextViewAnimator.addAnimationBuilder(views);
-    }
-
-    public AnimationBuilder addAnimationBuilder(View... views) {
-        AnimationBuilder animationBuilder = new AnimationBuilder(this, views);
-        animationList.add(animationBuilder);
-        return animationBuilder;
-    }
 
     protected AnimatorSet createAnimatorSet() {
         List<Animator> animators = new ArrayList<>();
@@ -130,6 +106,32 @@ public class ViewAnimator {
         return animatorSet;
     }
 
+    public static AnimationBuilder animate(View... view) {
+        ViewAnimator viewAnimator = new ViewAnimator();
+        return viewAnimator.addAnimationBuilder(view);
+    }
+
+    public AnimationBuilder thenAnimate(View... views) {
+        ViewAnimator nextViewAnimator = new ViewAnimator();
+        this.next = nextViewAnimator;
+        nextViewAnimator.prev = this;
+        return nextViewAnimator.addAnimationBuilder(views);
+    }
+
+    public AnimationBuilder addAnimationBuilder(View... views) {
+        AnimationBuilder animationBuilder = new AnimationBuilder(this, views);
+        animationList.add(animationBuilder);
+        return animationBuilder;
+    }
+
+    /**
+     * -1 or INFINITE will repeat forever
+     */
+    public ViewAnimator repeatCount(@IntRange(from = -1) int repeatCount) {
+        this.repeatCount = repeatCount;
+        return this;
+    }
+
     public void start() {
         if (prev != null) {
             prev.start();
@@ -171,23 +173,12 @@ public class ViewAnimator {
         return this;
     }
 
-    /**
-     * -1 or ValueAnimator.INFINITE will repeat forever
-     *
-     * @param repeatCount the repeat count
-     * @return the view animation
-     */
-    public ViewAnimator repeatCount(@IntRange(from = -1) int repeatCount) {
-        this.repeatCount = repeatCount;
-        return this;
+    @IntDef(value = {RESTART, REVERSE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface RepeatMode {
+        // use this instead enum, I heard that the enumeration will take a lot of memory
     }
 
-    /**
-     * ValueAnimator.RESTART or ValueAnimator.REVERSE
-     *
-     * @param repeatMode the repeat mode
-     * @return the view animation
-     */
     public ViewAnimator repeatMode(@RepeatMode int repeatMode) {
         this.repeatMode = repeatMode;
         return this;
@@ -205,9 +196,6 @@ public class ViewAnimator {
 
     /**
      * see https://github.com/cimi-chen/EaseInterpolator
-     *
-     * @param interpolator the interpolator
-     * @return the view animator
      */
     public ViewAnimator interpolator(Interpolator interpolator) {
         this.interpolator = interpolator;

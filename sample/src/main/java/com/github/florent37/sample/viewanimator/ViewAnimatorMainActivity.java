@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
@@ -109,8 +110,9 @@ public class ViewAnimatorMainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 viewAnimator.cancel();
+                Toast.makeText(getBaseContext(), "animator canceled", Toast.LENGTH_SHORT).show();
             }
-        }, 3000);
+        }, 4000);
     }
 
     protected void animateSequentially() {
@@ -125,9 +127,5 @@ public class ViewAnimatorMainActivity extends AppCompatActivity {
                 .interpolator(new AccelerateInterpolator())
                 .duration(1200)
                 .start();
-
-        ViewAnimator
-                .animate(image).scaleX(0, 1).scaleY(0, 1).alpha(0, 1).decelerate().duration(500)
-                .thenAnimate(image).scaleX(1, 0).scaleY(1, 0).alpha(1, 0).accelerate().duration(500);
     }
 }

@@ -144,7 +144,7 @@ ViewAnimator viewAnimator = ViewAnimator
 viewAnimator.cancel();
 ```
 
-Enhanced animations ( Thanks [AndroidViewAnimators](https://github.com/daimajia/AndroidViewAnimators), [NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects) )   
+Enhanced animations (Thanks [AndroidViewAnimations](https://github.com/daimajia/AndroidViewAnimations), [NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects) )   
 
 ![screenshots](/screenshots/enhanced.gif)
 
