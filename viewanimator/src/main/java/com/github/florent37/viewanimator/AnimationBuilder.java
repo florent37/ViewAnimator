@@ -1,18 +1,20 @@
 package com.github.florent37.viewanimator;
 
+import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.support.annotation.IntRange;
+import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.CycleInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
-
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.ArgbEvaluator;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +26,10 @@ import java.util.List;
 public class AnimationBuilder {
     private final ViewAnimator viewAnimator;
     private final View[] views;
-    private final List<Animator> animatorList = new ArrayList<Animator>();
+    private final List<Animator> animatorList = new ArrayList<>();
     private boolean waitForHeight;
     private boolean nextValueWillBeDp = false;
+    private Interpolator singleInterpolator = null;
 
     public AnimationBuilder(ViewAnimator viewAnimator, View... views) {
         this.viewAnimator = viewAnimator;
@@ -97,14 +100,14 @@ public class AnimationBuilder {
 
     public AnimationBuilder pivotX(float pivotX) {
         for (View view : views) {
-            ViewHelper.setPivotX(view, pivotX);
+            ViewCompat.setPivotX(view, pivotX);
         }
         return this;
     }
 
     public AnimationBuilder pivotY(float pivotY) {
         for (View view : views) {
-            ViewHelper.setPivotY(view, pivotY);
+            ViewCompat.setPivotY(view, pivotY);
         }
         return this;
     }
@@ -239,12 +242,29 @@ public class AnimationBuilder {
         return this;
     }
 
-    public ViewAnimator build() {
-        return viewAnimator;
+    public AnimationBuilder singleInterpolator(Interpolator interpolator) {
+        singleInterpolator = interpolator;
+        return this;
     }
 
-    public void start() {
+    public Interpolator getSingleInterpolator() {
+        return singleInterpolator;
+    }
+
+    public ViewAnimator accelerate() {
+        return viewAnimator.interpolator(new AccelerateInterpolator());
+    }
+
+    public ViewAnimator decelerate() {
+        return viewAnimator.interpolator(new DecelerateInterpolator());
+    }
+
+    /**
+     * Start.
+     */
+    public ViewAnimator start() {
         viewAnimator.start();
+        return viewAnimator;
     }
 
     public View[] getViews() {
@@ -444,15 +464,12 @@ public class AnimationBuilder {
         return custom(new AnimationListener.Update() {
             @Override
             public void update(View view, float value) {
-                if (view == null) {
-                    return;
-                }
-                float[] currentPosition = new float[2];
                 pathMeasure.getPosTan(value, currentPosition, null);
                 final float x = currentPosition[0];
                 final float y = currentPosition[1];
-                ViewHelper.setX(view, x);
-                ViewHelper.setY(view, y);
+                ViewCompat.setX(view, x);
+                ViewCompat.setY(view, y);
+                Log.d(null, "path: value=" + value + ", x=" + x + ", y=" + y);
             }
         }, 0, pathMeasure.getLength());
     }

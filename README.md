@@ -1,33 +1,35 @@
 ViewAnimator
 =======
 
-[![API](https://img.shields.io/badge/API-9%2B-green.svg)](https://github.com/florent37/ViewAnimator/tree/master)
+[![API](https://img.shields.io/badge/API-11%2B-green.svg)](https://github.com/florent37/ViewAnimator/tree/master)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ViewAnimator-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2942)
 
 A fluent Android animation library !
 
+
+<a href="https://goo.gl/WXW8Dc">
+  <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
+
 [![png](https://raw.githubusercontent.com/florent37/ViewAnimator/master/montain_small.jpg)](https://github.com/florent37/ViewAnimator)
 
-#Usage
+# Usage
 
 Animate multiple view from one method
 
 ```java
 ViewAnimator
        .animate(image)
-       .translationY(-1000, 0)
-       .alpha(0,1)
-           
+            .translationY(-1000, 0)
+            .alpha(0,1)
        .andAnimate(text)
-       .dp().translationX(-20, 0)
-       .interpolator(new DecelerateInterpolator())
-       .duration(2000)
-
+            .dp().translationX(-20, 0)
+            .decelerate()
+            .duration(2000)
        .thenAnimate(image)
-       .scale(1f,0.5f,1f)
-       .interpolator(new AccelerateInterpolator())
-       .duration(1000)
-
+            .scale(1f, 0.5f, 1f)
+            .accelerate()
+            .duration(1000)
        .start();
        
 ```
@@ -50,8 +52,8 @@ animatorSet.addListener(new AnimatorListenerAdapter(){
 
       AnimatorSet animatorSet2 = new AnimatorSet();
       animatorSet2.playTogether(
-          ObjectAnimator.ofFloat(image,"scaleX",1f,0.5f,1f),
-          ObjectAnimator.ofFloat(image,"scaleY",1f,0.5f,1f)
+          ObjectAnimator.ofFloat(image,"scaleX", 1f, 0.5f, 1f),
+          ObjectAnimator.ofFloat(image,"scaleY", 1f, 0.5f, 1f)
       );
       animatorSet2.setInterpolator(new AccelerateInterpolator());
       animatorSet2.setDuration(1000);
@@ -62,7 +64,7 @@ animatorSet.addListener(new AnimatorListenerAdapter(){
 animatorSet.start();
 ```
 
-#More
+# More
 
 [![gif](https://j.gifs.com/XD6R4V.gif)](https://youtu.be/Qlj40Y6ChSM)
 
@@ -71,7 +73,6 @@ Add same animation on multiples view
 ViewAnimator
        .animate(image,text)
        .scale(0,1)
-
        .start();
 ```
 
@@ -80,10 +81,8 @@ Add listeners
 ViewAnimator
        .animate(image)
        .scale(0,1)
-
        .onStart(() -> {})
        .onStop(() -> {})
-
        .start();
 
 ```
@@ -92,7 +91,7 @@ Use DP values
 ```java
 ViewAnimator
        .animate(image)
-           .dp().translationY(-200, 0)
+       .dp().translationY(-200, 0)
        .start();
 ```
 
@@ -100,9 +99,9 @@ Animate Height / Width
 ```java
 ViewAnimator
        .animate(view)
-           .waitForHeight() //wait until a ViewTreeObserver notification
-           .dp().width(100,200)
-           .dp().height(50,100)
+       .waitForHeight() //wait until a ViewTreeObserver notification
+       .dp().width(100,200)
+       .dp().height(50,100)
        .start();
 ```
 
@@ -110,8 +109,8 @@ Color animations
 ```java
 ViewAnimator
        .animate(view)
-            .textColor(Color.BLACK,Color.GREEN)
-            .backgroundColor(Color.WHITE,Color.BLACK)
+       .textColor(Color.BLACK,Color.GREEN)
+       .backgroundColor(Color.WHITE,Color.BLACK)
        .start();
 ```
 
@@ -119,7 +118,7 @@ Rotation animations
 ```java
 ViewAnimator
        .animate(view)
-            .rotation(360)
+       .rotation(360)
        .start();
 ```
 
@@ -127,49 +126,44 @@ Custom animations
 ```java
 ViewAnimator
        .animate(text)
-           .custom(new AnimationListener.Update<TextView>() {
-               @Override public void update(TextView view, float value) {
-                   view.setText(String.format("%.02f",value));
-               }
-           }, 0, 1)
+       .custom(new AnimationListener.Update<TextView>() {
+            @Override public void update(TextView view, float value) {
+                  view.setText(String.format("%.02f",value));
+            }
+        }, 0, 1)
        .start();
 ```
 
-Enhanced animations (Thanks [AndroidViewAnimations](https://github.com/daimajia/AndroidViewAnimations),[NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects))   
-![screenshots](/EnhancedAnimations.gif)   
+Cancel animations
 ```java
-.shake();
-.bounce().interpolator(new BounceInterpolator());
-.bounceIn();
-.bounceOut();
-.flash();
+ViewAnimator viewAnimator = ViewAnimator
+       .animate(view)
+       .rotation(360)
+       .start();
+
+viewAnimator.cancel();
+```
+
+Enhanced animations ( Thanks [AndroidViewAnimators](https://github.com/daimajia/AndroidViewAnimators), [NiftyDialogEffects](https://github.com/sd6352051/NiftyDialogEffects) )   
+
+![screenshots](/screenshots/enhanced.gif)
+
+```java
+.shake().interpolator(new LinearInterpolator());
+.bounceIn().interpolator(new BounceInterpolator());
+.flash().repeatCount(4);
 .flipHorizontal();
-.flipVertical();
-.wave();
+.wave().duration(5000);
 .tada();
-.rubber();
 .pulse();
 .standUp();
 .swing();
 .wobble();
-.zoomIn();
-.zoomOut();
-.rollIn();
-.rollOut();
-.fadeIn();
-.fadeOut();
-.fall();
-.newsPaper();
-.slit();
-.slideLeftIn();
-.slideRightIn();
-.slideTopIn();
-.slideBottomIn();
-.path(...);
-.svgPath(...);
 ```
+...
+![Preview](/EnhancedAnimations.gif)
 
-Path animations (Read http://blog.csdn.net/tianjian4592/article/details/47067161)   
+Path animations ( Read http://blog.csdn.net/tianjian4592/article/details/47067161 )   
 ```java
     final int[] START_POINT = new int[]{ 300, 270 };
     final int[] BOTTOM_POINT = new int[]{ 300, 400 };
@@ -180,46 +174,50 @@ Path animations (Read http://blog.csdn.net/tianjian4592/article/details/47067161
     path.quadTo(RIGHT_CONTROL_POINT[0], RIGHT_CONTROL_POINT[1], BOTTOM_POINT[0], BOTTOM_POINT[1]);
     path.quadTo(LEFT_CONTROL_POINT[0], LEFT_CONTROL_POINT[1], START_POINT[0], START_POINT[1]);
     path.close();
-    ViewAnimator.animate(view).path(path).repeatCount(ViewAnimator.INFINITE).start();
+    ViewAnimator.animate(view).path(path).repeatCount(2).start();
 ```
 
-SVG path animations (Read http://www.w3school.com.cn/svg/svg_path.asp)   
+SVG path animations (Read http://www.w3school.com.cn/svg/svg_path.asp)
+
+![screenshots](/screenshots/svg_path.jpg)   
+
 ```html
 <svg width="100%" height="100%">
     <path
         d="M 42.266949,70.444915 C 87.351695,30.995763 104.25847,28.177966 104.25847,28.177966 l 87.3517,36.631356 8.45339,14.088983 L 166.25,104.25847 50.720339,140.88983 c 0,0 -45.0847458,180.33898 -39.449153,194.42797 5.635594,14.08898 67.627119,183.15678 67.627119,183.15678 l 16.90678,81.7161 c 0,0 98.622885,19.72457 115.529665,22.54237 16.90678,2.8178 70.44491,-22.54237 78.8983,-33.81356 8.45339,-11.27118 76.08051,-107.07627 33.81356,-126.80085 -42.26695,-19.72457 -132.43644,-56.35593 -132.43644,-56.35593 0,0 -33.81356,-73.26271 -19.72458,-73.26271 14.08899,0 132.43644,73.26271 138.07204,33.81356 5.63559,-39.44915 19.72457,-169.0678 19.72457,-169.0678 0,0 28.17797,-25.36017 -28.17796,-19.72457 -56.35593,5.63559 -95.80509,11.27118 -95.80509,11.27118 l 42.26695,-87.35169 8.45339,-28.177968";
     />
-</svg>   
+</svg>
 ```
 ```java
-    final String SVG_PATH = "M 42.266949,70.444915 C 87.351695,30.995763 104.25847,28.177966 104.25847,28.177966 l 87.3517,36.631356 8.45339,14.088983 L 166.25,104.25847 50.720339,140.88983 c 0,0 -45.0847458,180.33898 -39.449153,194.42797 5.635594,14.08898 67.627119,183.15678 67.627119,183.15678 l 16.90678,81.7161 c 0,0 98.622885,19.72457 115.529665,22.54237 16.90678,2.8178 70.44491,-22.54237 78.8983,-33.81356 8.45339,-11.27118 76.08051,-107.07627 33.81356,-126.80085 -42.26695,-19.72457 -132.43644,-56.35593 -132.43644,-56.35593 0,0 -33.81356,-73.26271 -19.72458,-73.26271 14.08899,0 132.43644,73.26271 138.07204,33.81356 5.63559,-39.44915 19.72457,-169.0678 19.72457,-169.0678 0,0 28.17797,-25.36017 -28.17796,-19.72457 -56.35593,5.63559 -95.80509,11.27118 -95.80509,11.27118 l 42.26695,-87.35169 8.45339,-28.177968";
-    ViewAnimator
-    .animate(view)
-    .svgPath(SVG_PATH)
-    .repeatMode(ViewAnimator.REVERSE)
-    .repeatCount(2)
-    .start();
+final String SVG_PATH = "M 42.266949,70.444915 C 87.351695,30.995763 104.25847,28.177966 104.25847,28.177966 l 87.3517,36.631356 8.45339,14.088983 L 166.25,104.25847 50.720339,140.88983 c 0,0 -45.0847458,180.33898 -39.449153,194.42797 5.635594,14.08898 67.627119,183.15678 67.627119,183.15678 l 16.90678,81.7161 c 0,0 98.622885,19.72457 115.529665,22.54237 16.90678,2.8178 70.44491,-22.54237 78.8983,-33.81356 8.45339,-11.27118 76.08051,-107.07627 33.81356,-126.80085 -42.26695,-19.72457 -132.43644,-56.35593 -132.43644,-56.35593 0,0 -33.81356,-73.26271 -19.72458,-73.26271 14.08899,0 132.43644,73.26271 138.07204,33.81356 5.63559,-39.44915 19.72457,-169.0678 19.72457,-169.0678 0,0 28.17797,-25.36017 -28.17796,-19.72457 -56.35593,5.63559 -95.80509,11.27118 -95.80509,11.27118 l 42.26695,-87.35169 8.45339,-28.177968";
+ViewAnimator.animate(view).svgPath(SVG_PATH).repeatCount(3).start();
 ```
 
-#Download
+# Download
+
+<a href='https://ko-fi.com/A160LCC' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 Add into your **build.gradle**
 
 [![Download](https://api.bintray.com/packages/florent37/maven/ViewAnimator/images/download.svg)](https://bintray.com/florent37/maven/ViewAnimator/_latestVersion)
 
 ```groovy
-compile 'com.github.florent37:viewanimator:1.0.2@aar'
-compile 'com.nineoldandroids:library:2.4.0'
+compile 'com.github.florent37:viewanimator:1.0.5'
 ```
 
-#Community
+# Community
 
 Looking for contributors, feel free to fork !
 
-#Credits
+# Credits
 
 Author: Florent Champigny   
 Contributor: [李玉江(liyujiang)](https://github.com/gzu-liyujiang/ViewAnimator)   
+
+
+<a href="https://goo.gl/WXW8Dc">
+  <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
 
 <a href="https://plus.google.com/+florentchampigny">
   <img alt="Follow me on Google+"
@@ -229,12 +227,12 @@ Contributor: [李玉江(liyujiang)](https://github.com/gzu-liyujiang/ViewAnimato
   <img alt="Follow me on Twitter"
        src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/twitter.png" />
 </a>
-<a href="https://www.linkedin.com/profile/view?id=297860624">
+<a href="https://fr.linkedin.com/in/florentchampigny">
   <img alt="Follow me on LinkedIn"
        src="https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/linkedin.png" />
 </a>
 
-#License
+# License
 
     Copyright 2015 florent37, Inc.
 
