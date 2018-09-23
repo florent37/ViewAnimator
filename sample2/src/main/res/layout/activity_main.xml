@@ -194,7 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:contentDescription="@null"
-        android:src="@mipmap/liyujiang" />
+        android:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/animation_svg_path"
@@ -202,7 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:contentDescription="@null"
-        android:src="@mipmap/liyujiang" />
+        android:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/animation_snow"

@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -88,6 +89,7 @@ public class MainActivity extends Activity {
 
         onFollower(null);
         onBubble(null);
+        onSvgPath(null);
     }
 
     public void onDialog(View view) {
@@ -103,7 +105,9 @@ public class MainActivity extends Activity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-        ViewAnimator.animate(view, dialog.getWindow().getDecorView())
+        Window window = dialog.getWindow();
+        assert window != null;
+        ViewAnimator.animate(view, window.getDecorView())
                 .slideBottomIn()
                 .interpolator(new DecelerateInterpolator())
                 .start();
