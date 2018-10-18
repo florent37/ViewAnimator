@@ -4,7 +4,6 @@ apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion project.COMPILE_SDK
-    buildToolsVersion project.BUILD_TOOL
 
     defaultConfig {
         minSdkVersion project.minSdkVersion
@@ -15,10 +14,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:23.3.0'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:support-annotations:23.3.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:support-v4:'+project.supportVersion
+    implementation 'com.android.support:appcompat-v7:'+project.supportVersion
+    implementation 'com.android.support:support-annotations:'+project.supportVersion
 }
 
 ext {
