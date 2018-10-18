@@ -1,1 +1,1 @@
-include ':sample', ':viewanimator'
+include ':viewanimator', ':sample', ':sample2'

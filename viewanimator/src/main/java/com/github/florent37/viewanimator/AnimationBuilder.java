@@ -20,9 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Some effects thanks https://github.com/daimajia/AndroidViewAnimations
+ * and https://github.com/sd6352051/NiftyDialogEffects
+ * <p>
  * Created by florentchampigny on 22/12/2015.
  * Modified by gzu-liyujiang on 24/01/2016.
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 public class AnimationBuilder {
     private final ViewAnimator viewAnimator;
     private final View[] views;
@@ -31,64 +35,29 @@ public class AnimationBuilder {
     private boolean nextValueWillBeDp = false;
     private Interpolator singleInterpolator = null;
 
-    /**
-     * Instantiates a new Animation builder.
-     *
-     * @param viewAnimator the view animator
-     * @param views        the views
-     */
     public AnimationBuilder(ViewAnimator viewAnimator, View... views) {
         this.viewAnimator = viewAnimator;
         this.views = views;
     }
 
-    /**
-     * Dp animation builder.
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder dp() {
         nextValueWillBeDp = true;
         return this;
     }
 
-    /**
-     * Add animation builder.
-     *
-     * @param animator the animator
-     * @return the animation builder
-     */
     protected AnimationBuilder add(Animator animator) {
         this.animatorList.add(animator);
         return this;
     }
 
-    /**
-     * To dp float.
-     *
-     * @param px the px
-     * @return the float
-     */
     protected float toDp(final float px) {
         return px / views[0].getContext().getResources().getDisplayMetrics().density;
     }
 
-    /**
-     * To px float.
-     *
-     * @param dp the dp
-     * @return the float
-     */
     protected float toPx(final float dp) {
         return dp * views[0].getContext().getResources().getDisplayMetrics().density;
     }
 
-    /**
-     * Get values float [ ].
-     *
-     * @param values the values
-     * @return the float [ ]
-     */
     protected float[] getValues(float... values) {
         if (!nextValueWillBeDp) {
             return values;
@@ -100,13 +69,6 @@ public class AnimationBuilder {
         return pxValues;
     }
 
-    /**
-     * Property animation builder.
-     *
-     * @param propertyName the property name
-     * @param values       the values
-     * @return the animation builder
-     */
     public AnimationBuilder property(String propertyName, float... values) {
         for (View view : views) {
             this.animatorList.add(ObjectAnimator.ofFloat(view, propertyName, getValues(values)));
@@ -114,74 +76,32 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Translation y animation builder.
-     *
-     * @param y the y
-     * @return the animation builder
-     */
     public AnimationBuilder translationY(float... y) {
         return property("translationY", y);
     }
 
-    /**
-     * Translation x animation builder.
-     *
-     * @param x the x
-     * @return the animation builder
-     */
     public AnimationBuilder translationX(float... x) {
         return property("translationX", x);
     }
 
-    /**
-     * Alpha animation builder.
-     *
-     * @param alpha the alpha
-     * @return the animation builder
-     */
     public AnimationBuilder alpha(float... alpha) {
         return property("alpha", alpha);
     }
 
-    /**
-     * Scale x animation builder.
-     *
-     * @param scaleX the scale x
-     * @return the animation builder
-     */
     public AnimationBuilder scaleX(float... scaleX) {
         return property("scaleX", scaleX);
     }
 
-    /**
-     * Scale y animation builder.
-     *
-     * @param scaleY the scale y
-     * @return the animation builder
-     */
     public AnimationBuilder scaleY(float... scaleY) {
         return property("scaleY", scaleY);
     }
 
-    /**
-     * Scale animation builder.
-     *
-     * @param scale the scale
-     * @return the animation builder
-     */
     public AnimationBuilder scale(float... scale) {
         scaleX(scale);
         scaleY(scale);
         return this;
     }
 
-    /**
-     * Pivot x animation builder.
-     *
-     * @param pivotX the pivot x
-     * @return the animation builder
-     */
     public AnimationBuilder pivotX(float pivotX) {
         for (View view : views) {
             ViewCompat.setPivotX(view, pivotX);
@@ -189,12 +109,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Pivot y animation builder.
-     *
-     * @param pivotY the pivot y
-     * @return the animation builder
-     */
     public AnimationBuilder pivotY(float pivotY) {
         for (View view : views) {
             ViewCompat.setPivotY(view, pivotY);
@@ -202,12 +116,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Rotation x animation builder.
-     *
-     * @param pivotX the rotation x
-     * @return the animation builder
-     */
     public AnimationBuilder pivotX(float... pivotX) {
         ObjectAnimator.ofFloat(getView(), "pivotX", getValues(pivotX));
         return this;
@@ -222,32 +130,14 @@ public class AnimationBuilder {
         return property("rotationX", rotationX);
     }
 
-    /**
-     * Rotation y animation builder.
-     *
-     * @param rotationY the rotation y
-     * @return the animation builder
-     */
     public AnimationBuilder rotationY(float... rotationY) {
         return property("rotationY", rotationY);
     }
 
-    /**
-     * Rotation animation builder.
-     *
-     * @param rotation the rotation
-     * @return the animation builder
-     */
     public AnimationBuilder rotation(float... rotation) {
         return property("rotation", rotation);
     }
 
-    /**
-     * Background color animation builder.
-     *
-     * @param colors the colors
-     * @return the animation builder
-     */
     public AnimationBuilder backgroundColor(int... colors) {
         for (View view : views) {
             ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "backgroundColor", colors);
@@ -257,16 +147,11 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Text color animation builder.
-     *
-     * @param colors the colors
-     * @return the animation builder
-     */
     public AnimationBuilder textColor(int... colors) {
         for (View view : views) {
             if (view instanceof TextView) {
-                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(view, "textColor", colors);
+                TextView textView = (TextView) view;
+                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(textView, "textColor", colors);
                 objectAnimator.setEvaluator(new ArgbEvaluator());
                 this.animatorList.add(objectAnimator);
             }
@@ -274,13 +159,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Custom animation builder.
-     *
-     * @param update the update
-     * @param values the values
-     * @return the animation builder
-     */
     public AnimationBuilder custom(final AnimationListener.Update update, float... values) {
         for (final View view : views) {
             ValueAnimator valueAnimator = ValueAnimator.ofFloat(getValues(values));
@@ -297,12 +175,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Height animation builder.
-     *
-     * @param height the height
-     * @return the animation builder
-     */
     public AnimationBuilder height(float... height) {
         return custom(new AnimationListener.Update() {
             @Override
@@ -313,12 +185,6 @@ public class AnimationBuilder {
         }, height);
     }
 
-    /**
-     * Width animation builder.
-     *
-     * @param width the width
-     * @return the animation builder
-     */
     public AnimationBuilder width(float... width) {
         return custom(new AnimationListener.Update() {
             @Override
@@ -329,117 +195,53 @@ public class AnimationBuilder {
         }, width);
     }
 
-    /**
-     * Wait for height animation builder.
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder waitForHeight() {
         waitForHeight = true;
         return this;
     }
 
-    /**
-     * Create animators list.
-     *
-     * @return the list
-     */
     protected List<Animator> createAnimators() {
         return animatorList;
     }
 
-    /**
-     * And animate animation builder.
-     *
-     * @param views the views
-     * @return the animation builder
-     */
     public AnimationBuilder andAnimate(View... views) {
         return viewAnimator.addAnimationBuilder(views);
     }
 
-    /**
-     * Then animate animation builder.
-     *
-     * @param views the views
-     * @return the animation builder
-     */
     public AnimationBuilder thenAnimate(View... views) {
         return viewAnimator.thenAnimate(views);
     }
 
-    /**
-     * Duration view animator.
-     *
-     * @param duration the duration
-     * @return the animation builder
-     */
-    public AnimationBuilder duration(long duration) {
+    public AnimationBuilder duration(@IntRange(from = 1) long duration) {
         viewAnimator.duration(duration);
         return this;
     }
 
-    /**
-     * Start delay view animator.
-     *
-     * @param startDelay the start delay
-     * @return the animation builder
-     */
-    public AnimationBuilder startDelay(long startDelay) {
+    public AnimationBuilder startDelay(@IntRange(from = 0) long startDelay) {
         viewAnimator.startDelay(startDelay);
         return this;
     }
 
-    /**
-     * Repeat count of animation.
-     *
-     * @param repeatCount the repeat count
-     * @return the animation builder
-     */
     public AnimationBuilder repeatCount(@IntRange(from = -1) int repeatCount) {
         viewAnimator.repeatCount(repeatCount);
         return this;
     }
 
-    /**
-     * Repeat mode view animation.
-     *
-     * @param repeatMode the repeat mode
-     * @return the animation builder
-     */
     public AnimationBuilder repeatMode(@ViewAnimator.RepeatMode int repeatMode) {
         viewAnimator.repeatMode(repeatMode);
         return this;
     }
 
-    /**
-     * On start view animator.
-     *
-     * @param startListener the start listener
-     * @return the animation builder
-     */
     public AnimationBuilder onStart(AnimationListener.Start startListener) {
         viewAnimator.onStart(startListener);
         return this;
     }
 
-    /**
-     * On stop view animator.
-     *
-     * @param stopListener the stop listener
-     * @return the animation builder
-     */
     public AnimationBuilder onStop(AnimationListener.Stop stopListener) {
         viewAnimator.onStop(stopListener);
         return this;
     }
 
-    /**
-     * Interpolator view animator.
-     *
-     * @param interpolator the interpolator
-     * @return the animation builder
-     */
     public AnimationBuilder interpolator(Interpolator interpolator) {
         viewAnimator.interpolator(interpolator);
         return this;
@@ -470,29 +272,14 @@ public class AnimationBuilder {
         return viewAnimator;
     }
 
-    /**
-     * Get views view [ ].
-     *
-     * @return the view [ ]
-     */
     public View[] getViews() {
         return views;
     }
 
-    /**
-     * Gets view.
-     *
-     * @return the view
-     */
     public View getView() {
         return views[0];
     }
 
-    /**
-     * Is wait for height boolean.
-     *
-     * @return the boolean
-     */
     public boolean isWaitForHeight() {
         return waitForHeight;
     }
@@ -541,11 +328,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * Only support single view
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder rollIn() {
         for (View view : views) {
             alpha(0, 1);
@@ -576,9 +358,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * @return the animation builder
-     */
     public AnimationBuilder standUp() {
         for (View view : views) {
             float x = (view.getWidth() - view.getPaddingLeft() - view.getPaddingRight()) / 2
@@ -595,11 +374,6 @@ public class AnimationBuilder {
         return rotation(0, 10, -10, 6, -6, 3, -3, 0);
     }
 
-    /**
-     * Tada
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder tada() {
         scaleX(1, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.1f, 1.1f, 1.1f, 1);
         scaleY(1, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.1f, 1.1f, 1.1f, 1);
@@ -643,11 +417,6 @@ public class AnimationBuilder {
         return this;
     }
 
-    /**
-     * 大转盘。以下几个特效参见：https://github.com/sd6352051/NiftyDialogEffects
-     *
-     * @return the animation builder
-     */
     public AnimationBuilder fall() {
         rotation(1080, 720, 360, 0);
         return this;
@@ -668,37 +437,30 @@ public class AnimationBuilder {
         return this;
     }
 
-    public AnimationBuilder slideLeft() {
+    public AnimationBuilder slideLeftIn() {
         translationX(-300, 0);
         alpha(0, 1);
         return this;
     }
 
-    public AnimationBuilder slideRight() {
+    public AnimationBuilder slideRightIn() {
         translationX(300, 0);
         alpha(0, 1);
         return this;
     }
 
-    public AnimationBuilder slideTop() {
+    public AnimationBuilder slideTopIn() {
         translationY(-300, 0);
         alpha(0, 1);
         return this;
     }
 
-    public AnimationBuilder slideBottom() {
+    public AnimationBuilder slideBottomIn() {
         translationY(300, 0);
         alpha(0, 1);
         return this;
     }
 
-    /**
-     * 按指定路径运动
-     *
-     * @param path the path
-     * @return the animation builder
-     * @link http://blog.csdn.net/tianjian4592/article/details/47067161
-     */
     public AnimationBuilder path(Path path) {
         if (path == null) {
             return this;
@@ -707,7 +469,10 @@ public class AnimationBuilder {
         return custom(new AnimationListener.Update() {
             @Override
             public void update(View view, float value) {
-                float[] currentPosition = new float[2];// 当前点坐标
+                if (view == null) {
+                    return;
+                }
+                float[] currentPosition = new float[2];
                 pathMeasure.getPosTan(value, currentPosition, null);
                 final float x = currentPosition[0];
                 final float y = currentPosition[1];
@@ -716,18 +481,6 @@ public class AnimationBuilder {
                 Log.d(null, "path: value=" + value + ", x=" + x + ", y=" + y);
             }
         }, 0, pathMeasure.getLength());
-    }
-
-    /**
-     * Svg path animation, path like as:
-     * &lt;path d="M250 150 L150 350 L350 350 Z" /&gt;
-     *
-     * @param dAttributeOfPath the d attribute of &lt;path&gt; from the XML
-     * @return the view animation
-     * @link http://www.w3school.com.cn/svg/svg_path.asp
-     */
-    public AnimationBuilder svgPath(String dAttributeOfPath) {
-        return path(SvgPathParser.tryParsePath(dAttributeOfPath));
     }
 
 }

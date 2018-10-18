@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -30,7 +30,6 @@
             android:id="@+id/image"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:adjustViewBounds="true"
             android:src="@drawable/view_animator_github"
             android:visibility="visible" />
@@ -50,70 +49,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/parallel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:visibility="visible">
+            android:text="Custom Animation" />
 
-            <Button
-                android:id="@+id/parallel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Custom Animation" />
-
-            <Button
-                android:id="@+id/sequentially"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Width / Height" />
-
-            <Button
-                android:id="@+id/enhanced"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="enhanced animation" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="1"
+        <Button
+            android:id="@+id/sequentially"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Width / Height" />
 
-            <Button
-                android:id="@+id/path"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="path animation" />
-
-            <Button
-                android:id="@+id/svgPath"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="svg path animation" />
-
-            <Button
-                android:id="@+id/wave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Wave" />
-
-            <Button
-                android:id="@+id/shake"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Shake" />
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
+

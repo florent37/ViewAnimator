@@ -18,7 +18,11 @@ import java.util.List;
  * Created by florentchampigny on 22/12/2015.
  * Modified by gzu-liyujiang on 24/01/2016.
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 public class ViewAnimator {
+    public static final int RESTART = ValueAnimator.RESTART;
+    public static final int REVERSE = ValueAnimator.REVERSE;
+    public static final int INFINITE = ValueAnimator.INFINITE;
     private static final long DEFAULT_DURATION = 3000;
 
     private List<AnimationBuilder> animationList = new ArrayList<>();
@@ -27,7 +31,7 @@ public class ViewAnimator {
     private Interpolator interpolator = null;
 
     private int repeatCount = 0;
-    private int repeatMode = ValueAnimator.RESTART;
+    private int repeatMode = RESTART;
 
     private AnimatorSet animatorSet;
     private View waitForThisViewHeight = null;
@@ -37,33 +41,6 @@ public class ViewAnimator {
 
     private ViewAnimator prev = null;
     private ViewAnimator next = null;
-
-    /**
-     * The interface Repeat mode.
-     */
-    @IntDef(flag = false, value = {ValueAnimator.RESTART, ValueAnimator.REVERSE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface RepeatMode {
-        //代替enum，据说枚举类极其耗费内存
-    }
-
-    public static AnimationBuilder animate(View... view) {
-        ViewAnimator viewAnimator = new ViewAnimator();
-        return viewAnimator.addAnimationBuilder(view);
-    }
-
-    public AnimationBuilder thenAnimate(View... views) {
-        ViewAnimator nextViewAnimator = new ViewAnimator();
-        this.next = nextViewAnimator;
-        nextViewAnimator.prev = this;
-        return nextViewAnimator.addAnimationBuilder(views);
-    }
-
-    public AnimationBuilder addAnimationBuilder(View... views) {
-        AnimationBuilder animationBuilder = new AnimationBuilder(this, views);
-        animationList.add(animationBuilder);
-        return animationBuilder;
-    }
 
     protected AnimatorSet createAnimatorSet() {
         List<Animator> animators = new ArrayList<>();
@@ -129,7 +106,33 @@ public class ViewAnimator {
         return animatorSet;
     }
 
-    public ViewAnimator start() {
+    public static AnimationBuilder animate(View... view) {
+        ViewAnimator viewAnimator = new ViewAnimator();
+        return viewAnimator.addAnimationBuilder(view);
+    }
+
+    public AnimationBuilder thenAnimate(View... views) {
+        ViewAnimator nextViewAnimator = new ViewAnimator();
+        this.next = nextViewAnimator;
+        nextViewAnimator.prev = this;
+        return nextViewAnimator.addAnimationBuilder(views);
+    }
+
+    public AnimationBuilder addAnimationBuilder(View... views) {
+        AnimationBuilder animationBuilder = new AnimationBuilder(this, views);
+        animationList.add(animationBuilder);
+        return animationBuilder;
+    }
+
+    /**
+     * -1 or INFINITE will repeat forever
+     */
+    public ViewAnimator repeatCount(@IntRange(from = -1) int repeatCount) {
+        this.repeatCount = repeatCount;
+        return this;
+    }
+
+    public void start() {
         if (prev != null) {
             prev.start();
         } else {
@@ -148,7 +151,6 @@ public class ViewAnimator {
                 animatorSet.start();
             }
         }
-        return this;
     }
 
     public void cancel() {
@@ -161,33 +163,22 @@ public class ViewAnimator {
         }
     }
 
-    public ViewAnimator duration(long duration) {
+    public ViewAnimator duration(@IntRange(from = 1) long duration) {
         this.duration = duration;
         return this;
     }
 
-    public ViewAnimator startDelay(long startDelay) {
+    public ViewAnimator startDelay(@IntRange(from = 0) long startDelay) {
         this.startDelay = startDelay;
         return this;
     }
 
-    /**
-     * Repeat count of animation.
-     *
-     * @param repeatCount the repeat count
-     * @return the view animation
-     */
-    public ViewAnimator repeatCount(@IntRange(from = -1) int repeatCount) {
-        this.repeatCount = repeatCount;
-        return this;
+    @IntDef(value = {RESTART, REVERSE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface RepeatMode {
+        // use this instead enum, I heard that the enumeration will take a lot of memory
     }
 
-    /**
-     * Repeat mode view animation.
-     *
-     * @param repeatMode the repeat mode
-     * @return the view animation
-     */
     public ViewAnimator repeatMode(@RepeatMode int repeatMode) {
         this.repeatMode = repeatMode;
         return this;
@@ -204,11 +195,7 @@ public class ViewAnimator {
     }
 
     /**
-     * Interpolator view animator.
-     *
-     * @param interpolator the interpolator
-     * @return the view animator
-     * @link https://github.com/cimi-chen/EaseInterpolator
+     * see https://github.com/cimi-chen/EaseInterpolator
      */
     public ViewAnimator interpolator(Interpolator interpolator) {
         this.interpolator = interpolator;
