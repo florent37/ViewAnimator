@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-./gradlew expansionpanel:clean
-./gradlew expansionpanel:assembleDebug
-./gradlew expansionpanel:install
-./gradlew expansionpanel:bintrayUpload
+./gradlew viewanimator:clean
+./gradlew viewanimator:assembleDebug
+./gradlew viewanimator:install
+./gradlew viewanimator:bintrayUpload
