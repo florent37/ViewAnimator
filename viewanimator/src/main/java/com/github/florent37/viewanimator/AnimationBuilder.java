@@ -104,14 +104,14 @@ public class AnimationBuilder {
 
     public AnimationBuilder pivotX(float pivotX) {
         for (View view : views) {
-            ViewCompat.setPivotX(view, pivotX);
+            view.setPivotX(pivotX);
         }
         return this;
     }
 
     public AnimationBuilder pivotY(float pivotY) {
         for (View view : views) {
-            ViewCompat.setPivotY(view, pivotY);
+            view.setPivotY(pivotY);
         }
         return this;
     }
@@ -476,8 +476,8 @@ public class AnimationBuilder {
                 pathMeasure.getPosTan(value, currentPosition, null);
                 final float x = currentPosition[0];
                 final float y = currentPosition[1];
-                ViewCompat.setX(view, x);
-                ViewCompat.setY(view, y);
+                view.setX(x);
+                view.setY(y);
                 Log.d(null, "path: value=" + value + ", x=" + x + ", y=" + y);
             }
         }, 0, pathMeasure.getLength());

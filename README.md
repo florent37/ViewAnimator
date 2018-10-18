@@ -174,16 +174,6 @@ Path animations ( Inspiration from http://blog.csdn.net/tianjian4592/article/det
     ViewAnimator.animate(view).path(path).repeatCount(-1).start();
 ```
 
-SVG path animations (See simple 2, read http://www.w3school.com.cn/svg/svg_path.asp)
-```html
-<svg width="100%" height="100%">
-    <path d="M..."  />
-</svg>
-```
-```java
-final String SVG_PATH = "M...";
-ViewAnimator.animate(view).path(SvgPathParser.tryParsePath(SVG_PATH)).repeatCount(-1).start();
-```
 
 # Download
 
