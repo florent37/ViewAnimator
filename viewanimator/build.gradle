@@ -4,9 +4,8 @@ apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion project.COMPILE_SDK
-
     defaultConfig {
-        minSdkVersion project.minSdkVersion
+        minSdkVersion project.MIN_SDK
         targetSdkVersion project.TARGET_SDK
         versionCode 1
         versionName "1.0.1"
@@ -15,8 +14,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:support-v4:'+project.supportVersion
-    implementation 'com.android.support:appcompat-v7:'+project.supportVersion
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 }
 
 ext {

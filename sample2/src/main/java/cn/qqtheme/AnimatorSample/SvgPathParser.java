@@ -1,8 +1,9 @@
 package cn.qqtheme.AnimatorSample;
 
 import android.graphics.Path;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 /**
  * SVG Path Parser

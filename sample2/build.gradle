@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion project.COMPILE_SDK
-
     defaultConfig {
-        applicationId "cn.qqtheme.AnimatorSample"
-        minSdkVersion project.minSdkVersion
+        minSdkVersion project.MIN_SDK
         targetSdkVersion project.TARGET_SDK
+
+        applicationId "cn.qqtheme.AnimatorSample"
 
         buildTypes {
             release {
@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:support-v4:"+project.supportVersion
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation project(':viewanimator')
 }

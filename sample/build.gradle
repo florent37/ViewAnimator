@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion project.COMPILE_SDK
-
     defaultConfig {
-        applicationId "com.github.florent37.viewanimator"
-        minSdkVersion project.minSdkVersion
+        minSdkVersion project.MIN_SDK
         targetSdkVersion project.TARGET_SDK
+
+        applicationId "com.github.florent37.viewanimator"
 
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation "com.android.support:appcompat-v7:"+project.supportVersion
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation project(':viewanimator')
 }

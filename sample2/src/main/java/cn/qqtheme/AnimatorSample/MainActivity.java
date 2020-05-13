@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.Path;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +16,8 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+
+import androidx.core.view.ViewCompat;
 
 import com.github.florent37.viewanimator.AnimationBuilder;
 import com.github.florent37.viewanimator.AnimationListener;
@@ -283,8 +284,8 @@ public class MainActivity extends Activity {
                     @Override
                     public void onStop() {
                         //restore location
-                        ViewCompat.setX(imageView4svg, imgLoc[0]);
-                        ViewCompat.setY(imageView4svg, imgLoc[1]);
+                        imageView4svg.setX(imgLoc[0]);
+                        imageView4svg.setY(imgLoc[1]);
                     }
                 })
                 .start();

@@ -39,6 +39,7 @@ if(project.rootProject.file('local.properties').exists() && (_user == null || _u
 bintray {
     user = _user
     key = _key
+
     override = true
     configurations = ['archives']
     pkg {
