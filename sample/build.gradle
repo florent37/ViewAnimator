@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+// accept pull req
 android {
     compileSdkVersion project.COMPILE_SDK
     defaultConfig {
