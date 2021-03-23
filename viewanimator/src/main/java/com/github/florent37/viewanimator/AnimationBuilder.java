@@ -3,6 +3,7 @@ package com.github.florent37.viewanimator;
 import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -244,6 +245,11 @@ public class AnimationBuilder {
 
     public AnimationBuilder interpolator(Interpolator interpolator) {
         viewAnimator.interpolator(interpolator);
+        return this;
+    }
+
+    public AnimationBuilder evaluator(TypeEvaluator evaluator) {
+        viewAnimator.evaluator(evaluator);
         return this;
     }
 

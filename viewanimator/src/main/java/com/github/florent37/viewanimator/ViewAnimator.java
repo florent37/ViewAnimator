@@ -2,6 +2,7 @@ package com.github.florent37.viewanimator;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -30,6 +31,7 @@ public class ViewAnimator {
     private long duration = DEFAULT_DURATION;
     private long startDelay = 0;
     private Interpolator interpolator = null;
+    private TypeEvaluator evaluator = null;
 
     private int repeatCount = 0;
     private int repeatMode = RESTART;
@@ -67,6 +69,7 @@ public class ViewAnimator {
                 ValueAnimator valueAnimator = (ValueAnimator) animator;
                 valueAnimator.setRepeatCount(repeatCount);
                 valueAnimator.setRepeatMode(repeatMode);
+                valueAnimator.setEvaluator(evaluator);
             }
         }
 
@@ -200,6 +203,11 @@ public class ViewAnimator {
      */
     public ViewAnimator interpolator(Interpolator interpolator) {
         this.interpolator = interpolator;
+        return this;
+    }
+
+    public ViewAnimator evaluator(TypeEvaluator evaluator) {
+        this.evaluator = evaluator;
         return this;
     }
 
