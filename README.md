@@ -175,6 +175,21 @@ Path animations ( Inspiration from http://blog.csdn.net/tianjian4592/article/det
 ```
 
 
+Animations with custom evalutors - such as those available in [AnimationEasingFunctions](https://github.com/daimajia/AnimationEasingFunctions) for more advanced [easing interpolators](https://easings.net/)
+```java
+ViewAnimator.animate(view)
+                .translationY(0f, translateY) // up
+                .startDelay(1000)
+                .duration(150)
+                .interpolator(DecelerateInterpolator())
+                .thenAnimate(view)
+                .translationY(translateY, 0f) // down with a 'boing' effect
+                .evaluator(ElasticEaseOut(500))
+                .duration(500)
+                .onStop { startAnimation() } // restart the animation, by creating it again
+                .start()
+```
+
 # Download
 
 <a href='https://ko-fi.com/A160LCC' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
